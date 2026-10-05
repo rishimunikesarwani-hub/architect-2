@@ -1,141 +1,154 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1710" viewBox="0 0 2000 1710" role="img" aria-labelledby="title desc">
-<title id="title">Architect 2.0 engineering map</title><desc id="desc">Current React prototype, browser demo storage, isolated iframe, Better Auth and Convex owner-scoped backend. Google credentials are pending. Build, GitHub, deployment and multiplayer permission review are simulations. Shared project membership and protected cross-team agent reuse are future proposals.</desc>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#688074"/></marker><marker id="amber-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#ae8739"/></marker><marker id="future-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#89969c"/></marker></defs>
-<style>text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#24362c}.title{font-size:43px;font-weight:650;letter-spacing:-1.2px}.subtitle{font-size:20px;fill:#77837b}.section{font-size:25px;font-weight:650;letter-spacing:-.4px}.kicker{font-size:15px;font-weight:700;letter-spacing:1.8px;fill:#7b8b80}.node-title{font-size:23px;font-weight:650;letter-spacing:-.25px}.body{font-size:18px;fill:#66766b}.small{font-size:16px;fill:#7e8a81}.label{font-size:16px;font-weight:550;fill:#647b6b}.status{font-size:12px;font-weight:750;letter-spacing:1px}.edge{fill:none;stroke:#688074;stroke-width:2.4;marker-end:url(#arrow)}.pending-edge{fill:none;stroke:#ae8739;stroke-width:2.4;stroke-dasharray:8 7;marker-end:url(#amber-arrow)}.future-edge{fill:none;stroke:#89969c;stroke-width:2.4;stroke-dasharray:7 6;marker-end:url(#future-arrow)}</style>
-<rect width="2000" height="1710" fill="#fafbf8"/>
-<text x="48" y="72" class="title">Architect 2.0</text><text x="385" y="72" class="title" style="font-weight:350;fill:#7b887e">Engineering map</text>
-<text x="48" y="112" class="subtitle">One project, two building styles. Clear boundaries between code, credentials and concept.</text>
-<text x="1950" y="69" text-anchor="end" class="kicker">05 OCT 2026 · DEVELOPMENT SNAPSHOT</text>
-<rect x="48" y="136" width="108.9" height="23" rx="5" fill="#edf6ef" stroke="#4a815c" stroke-width=".7"/><text x="59" y="152" class="status" style="fill:#235236">IMPLEMENTED</text>
-<rect x="208" y="136" width="172.1" height="23" rx="5" fill="#fff4da" stroke="#b28732" stroke-width=".7"/><text x="219" y="152" class="status" style="fill:#765510">CREDENTIALS PENDING</text>
-<rect x="430" y="136" width="124.7" height="23" rx="5" fill="#f2edfa" stroke="#947db7" stroke-width=".7"/><text x="441" y="152" class="status" style="fill:#614782">UI SIMULATION</text>
-<rect x="608" y="136" width="180" height="23" rx="5" fill="#f4f6f7" stroke="#859399" stroke-width=".7"/><text x="619" y="152" class="status" style="fill:#4e6169">PROPOSED MULTIPLAYER</text>
-<rect x="40" y="190" width="1920" height="745" rx="20" fill="#fff" stroke="#d6e0d6"/>
-<text x="65" y="225" class="section">01  CURRENT APP + AUTHENTICATED STORAGE</text>
-<rect x="64" y="250" width="656" height="658" rx="14" fill="#fbfcfa" stroke="#dfe6dc"/><rect x="770" y="250" width="1164" height="658" rx="14" fill="#fbfcfa" stroke="#dfe6dc"/>
-<text x="85" y="279" class="kicker">BROWSER / USER DEVICE</text>
-<text x="795" y="279" class="kicker">CONVEX DEVELOPMENT DEPLOYMENT + IDENTITY PROVIDER</text>
-<rect x="85" y="303" width="580" height="112" rx="13" fill="#edf6ef" stroke="#4a815c" stroke-width="1.4"/>
-<rect x="105" y="319" width="108.9" height="23" rx="5" fill="#edf6ef" stroke="#4a815c" stroke-width=".7"/><text x="116" y="335" class="status" style="fill:#235236">IMPLEMENTED</text>
-<text x="105" y="369" class="node-title">React workspace</text>
-<text x="105" y="399" class="body">Guided + Developer · source import, editing and export</text>
-<rect x="85" y="486" width="300" height="152" rx="13" fill="#edf6ef" stroke="#4a815c" stroke-width="1.4"/>
-<rect x="105" y="502" width="108.9" height="23" rx="5" fill="#edf6ef" stroke="#4a815c" stroke-width=".7"/><text x="116" y="518" class="status" style="fill:#235236">IMPLEMENTED</text>
-<text x="105" y="552" class="node-title">Project state</text>
-<text x="105" y="582" class="body">Owner-aware save queue</text>
-<text x="105" y="607" class="body">Latest-write tracking</text>
-<text x="105" y="632" class="body">Files · agents · history</text>
-<rect x="430" y="486" width="240" height="152" rx="13" fill="#edf6ef" stroke="#4a815c" stroke-width="1.4"/>
-<rect x="450" y="502" width="108.9" height="23" rx="5" fill="#edf6ef" stroke="#4a815c" stroke-width=".7"/><text x="461" y="518" class="status" style="fill:#235236">IMPLEMENTED</text>
-<text x="450" y="552" class="node-title">Guest demo</text>
-<text x="450" y="582" class="body">Browser localStorage</text>
-<text x="450" y="607" class="body">No automatic upload</text>
-<text x="450" y="632" class="body">No shared workspace</text>
-<rect x="85" y="725" width="300" height="150" rx="13" fill="#edf6ef" stroke="#4a815c" stroke-width="1.4"/>
-<rect x="105" y="741" width="108.9" height="23" rx="5" fill="#edf6ef" stroke="#4a815c" stroke-width=".7"/><text x="116" y="757" class="status" style="fill:#235236">IMPLEMENTED</text>
-<text x="105" y="791" class="node-title">HTML preview</text>
-<text x="105" y="821" class="body">Opaque-origin iframe</text>
-<text x="105" y="846" class="body">Scripts allowed; CSP set</text>
-<text x="105" y="871" class="body">Host storage isolated</text>
-<rect x="430" y="725" width="240" height="150" rx="13" fill="#f2edfa" stroke="#947db7" stroke-width="1.4"/>
-<rect x="450" y="741" width="124.7" height="23" rx="5" fill="#f2edfa" stroke="#947db7" stroke-width=".7"/><text x="461" y="757" class="status" style="fill:#614782">UI SIMULATION</text>
-<text x="450" y="791" class="node-title">Scripted flows</text>
-<text x="450" y="821" class="body">Build · test · GitHub</text>
-<text x="450" y="846" class="body">Tools · share · deploy</text>
-<text x="450" y="871" class="body">No external action</text>
-<rect x="820" y="303" width="430" height="112" rx="13" fill="#edf6ef" stroke="#4a815c" stroke-width="1.4"/>
-<rect x="840" y="319" width="108.9" height="23" rx="5" fill="#edf6ef" stroke="#4a815c" stroke-width=".7"/><text x="851" y="335" class="status" style="fill:#235236">IMPLEMENTED</text>
-<text x="840" y="369" class="node-title">Better Auth</text>
-<text x="840" y="399" class="body">Sessions stored via Convex component</text>
-<rect x="1420" y="303" width="440" height="112" rx="13" fill="#fff4da" stroke="#b28732" stroke-width="1.4"/>
-<rect x="1440" y="319" width="172.1" height="23" rx="5" fill="#fff4da" stroke="#b28732" stroke-width=".7"/><text x="1451" y="335" class="status" style="fill:#765510">CREDENTIALS PENDING</text>
-<text x="1440" y="369" class="node-title">Google OAuth</text>
-<text x="1440" y="399" class="body">Client credentials + real login pending</text>
-<rect x="820" y="500" width="430" height="152" rx="13" fill="#edf6ef" stroke="#4a815c" stroke-width="1.4"/>
-<rect x="840" y="516" width="108.9" height="23" rx="5" fill="#edf6ef" stroke="#4a815c" stroke-width=".7"/><text x="851" y="532" class="status" style="fill:#235236">IMPLEMENTED</text>
-<text x="840" y="566" class="node-title">Project API + owner checks</text>
-<text x="840" y="596" class="body">Identity comes from server session</text>
-<text x="840" y="621" class="body">list / create / get / update / archive</text>
-<text x="840" y="646" class="body">Foreign or archived project → reject</text>
-<rect x="1420" y="500" width="440" height="152" rx="13" fill="#edf6ef" stroke="#4a815c" stroke-width="1.4"/>
-<rect x="1440" y="516" width="108.9" height="23" rx="5" fill="#edf6ef" stroke="#4a815c" stroke-width=".7"/><text x="1451" y="532" class="status" style="fill:#235236">IMPLEMENTED</text>
-<text x="1440" y="566" class="node-title">Convex projects collection</text>
-<text x="1440" y="596" class="body">ownerId + project metadata</text>
-<text x="1440" y="621" class="body">stateJson: files, messages, settings</text>
-<text x="1440" y="646" class="body">600 KB state limit · no credentials</text>
-<path d="M235 415 V486" class="edge"/>
-<text x="105" y="456" class="label">project changes</text>
-<path d="M550 415 V486" class="edge"/>
-<text x="568" y="456" class="label">guest</text>
-<path d="M665 359 H820" class="pending-edge"/>
-<text x="686" y="342" class="label">sign-in</text>
-<path d="M1250 359 H1420" class="pending-edge"/>
-<text x="1273" y="342" class="label">provider exchange</text>
-<path d="M1035 415 V500" class="edge"/>
-<text x="1052" y="462" class="label">validated identity</text>
-<path d="M1250 576 H1420" class="edge"/>
-<text x="1273" y="536" class="label">owner-scoped</text>
-<text x="1273" y="558" class="label">read / write</text>
-<path d="M385 570 H404 V678 H791 V576 H820" class="edge"/>
-<text x="430" y="703" class="label">authenticated mutations + reactive results</text>
-<path d="M235 638 V725" class="edge"/>
-<text x="105" y="687" class="label">HTML via srcDoc</text>
-<rect x="820" y="725" width="1040" height="150" rx="12" fill="#f6f8f3" stroke="#d8e1d3"/>
-<text x="843" y="759" class="kicker">REAL BACKEND. PROVIDER ROUND TRIP STILL PENDING.</text>
-<text x="843" y="790" class="body">Dev functions deployed; anonymous requests rejected. Ownership tests use convex-test.</text>
-<text x="843" y="819" class="body">Google login, reload and two-account isolation need the configured provider and browser check.</text>
-<text x="843" y="847" class="small">Preview restricts network APIs/resources; it is not a server runtime or complete network isolation.</text>
-<rect x="40" y="977" width="1920" height="675" rx="20" fill="#fdfdfe" stroke="#b2bcc2" stroke-width="1.5" stroke-dasharray="9 6"/>
-<text x="65" y="1016" class="section">02  MULTIPLAYER DIRECTION — CONCEPT ACCEPTED, SHARED BACKEND PROPOSED</text>
-<text x="65" y="1048" class="subtitle">Inherited choice: each department owns its agents; other teams use released capabilities through explicit permissions.</text>
-<rect x="80" y="1080" width="560" height="150" rx="13" fill="#f4f6f7" stroke="#859399" stroke-width="1.4" stroke-dasharray="7 5"/>
-<rect x="100" y="1096" width="251.10000000000002" height="23" rx="5" fill="#f4f6f7" stroke="#859399" stroke-width=".7"/><text x="111" y="1112" class="status" style="fill:#4e6169">PROPOSED DESIGN-TIME SERVICES</text>
-<text x="100" y="1146" class="node-title">People building together</text>
-<text x="100" y="1176" class="body">Membership + roles · comments · collaborator activity</text>
-<text x="100" y="1201" class="body">Server drafts; compare expected revision before save</text>
-<text x="100" y="1226" class="body">Conflict diff + human reconcile; live co-editing later</text>
-<rect x="720" y="1080" width="560" height="150" rx="13" fill="#f4f6f7" stroke="#859399" stroke-width="1.4" stroke-dasharray="7 5"/>
-<rect x="740" y="1096" width="211.60000000000002" height="23" rx="5" fill="#f4f6f7" stroke="#859399" stroke-width=".7"/><text x="751" y="1112" class="status" style="fill:#4e6169">PROPOSED SHARED REGISTRY</text>
-<text x="740" y="1146" class="node-title">Department-owned agent registry</text>
-<text x="740" y="1176" class="body">Stable agent ID · immutable version · owner/maintainers</text>
-<text x="740" y="1201" class="body">Typed input/output contract · explicit invoke grants</text>
-<text x="740" y="1226" class="body">Studio changes and releases stay with the owner</text>
-<rect x="1360" y="1080" width="560" height="150" rx="13" fill="#f2edfa" stroke="#947db7" stroke-width="1.4"/>
-<rect x="1380" y="1096" width="314.3" height="23" rx="5" fill="#f2edfa" stroke="#947db7" stroke-width=".7"/><text x="1391" y="1112" class="status" style="fill:#614782">UI SIMULATION / NO LIVE COLLABORATION</text>
-<text x="1380" y="1146" class="node-title">Agent-library permission review</text>
-<text x="1380" y="1176" class="body">Support requests Finance invoice-status access</text>
-<text x="1380" y="1201" class="body">Owner reviews; reuse creates a project from contract</text>
-<text x="1380" y="1226" class="body">Local UI flow only; no shared grant enforcement</text>
-<path d="M640 1153 H720" class="future-edge"/>
-<text x="85" y="1274" class="kicker">SEPARATE RUNTIME PATH · NOT THE SAME AS COLLABORATIVE EDITING</text>
-<rect x="80" y="1300" width="320" height="144" rx="13" fill="#f4f6f7" stroke="#859399" stroke-width="1.4" stroke-dasharray="7 5"/>
-<rect x="100" y="1316" width="85.2" height="23" rx="5" fill="#f4f6f7" stroke="#859399" stroke-width=".7"/><text x="111" y="1332" class="status" style="fill:#4e6169">PROPOSED</text>
-<text x="100" y="1366" class="node-title">Support agent</text>
-<text x="100" y="1396" class="body">Verified user + case</text>
-<text x="100" y="1421" class="body">No Finance edit rights</text>
-<rect x="480" y="1300" width="430" height="144" rx="13" fill="#f4f6f7" stroke="#859399" stroke-width="1.4" stroke-dasharray="7 5"/>
-<rect x="500" y="1316" width="180" height="23" rx="5" fill="#f4f6f7" stroke="#859399" stroke-width=".7"/><text x="511" y="1332" class="status" style="fill:#4e6169">PROPOSED ENFORCEMENT</text>
-<text x="500" y="1366" class="node-title">Invocation authorization</text>
-<text x="500" y="1396" class="body">Check identity, grant and scope</text>
-<text x="500" y="1421" class="body">Deny unlisted actions; log decision</text>
-<rect x="990" y="1300" width="390" height="144" rx="13" fill="#f4f6f7" stroke="#859399" stroke-width="1.4" stroke-dasharray="7 5"/>
-<rect x="1010" y="1316" width="85.2" height="23" rx="5" fill="#f4f6f7" stroke="#859399" stroke-width=".7"/><text x="1021" y="1332" class="status" style="fill:#4e6169">PROPOSED</text>
-<text x="1010" y="1366" class="node-title">Finance-owned agent</text>
-<text x="1010" y="1396" class="body">Pinned released version</text>
-<text x="1010" y="1421" class="body">Return approved invoice fields</text>
-<rect x="1460" y="1300" width="460" height="144" rx="13" fill="#f4f6f7" stroke="#859399" stroke-width="1.4" stroke-dasharray="7 5"/>
-<rect x="1480" y="1316" width="172.1" height="23" rx="5" fill="#f4f6f7" stroke="#859399" stroke-width=".7"/><text x="1491" y="1332" class="status" style="fill:#4e6169">PROPOSED CONNECTION</text>
-<text x="1480" y="1366" class="node-title">Protected API + billing</text>
-<text x="1480" y="1396" class="body">Recheck scope; then read invoice</text>
-<text x="1480" y="1421" class="body">Credentials stay inside runtime</text>
-<path d="M400 1372 H480" class="future-edge"/>
-<path d="M910 1372 H990" class="future-edge"/>
-<path d="M1380 1372 H1460" class="future-edge"/>
-<path d="M936 1230 V1282 H695 V1300" class="future-edge"/>
-<text x="947" y="1269" class="label">approved version + grant</text>
-<rect x="80" y="1495" width="1840" height="113" rx="12" fill="#f2f5f6" stroke="#d6dfe2"/>
-<text x="103" y="1528" class="kicker">THE CURRENT CONVEX DATABASE REMAINS SINGLE-OWNER.</text>
-<text x="103" y="1558" class="body">The permission-review UI does not add shared memberships, real approvals or a multiuser agent registry to that database.</text>
-<text x="103" y="1586" class="small">Future activity separates human edits from runtime decisions. Studio / OpenController adapters and protected execution remain unverified.</text>
-<text x="48" y="1690" class="small">Sources: current src/app.tsx, workspace.tsx and src/convex/* · prior Lyzr AI/architecture.md + multiplayer-agent-deck/deck-brief.md. See companion Markdown for exact links.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1940" viewBox="0 0 2200 1940" role="img" aria-labelledby="title desc"><title id="title">Architect 2.0 - local source and proposed runtime</title><desc id="desc">Login ID authentication, department project permissions, lightweight catalog and revision conflict saves exist in local source and await development deployment approval. Google is deferred. AgentLibrary remains fictional; agent registry and runtime grants remain proposed.</desc><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 1 L8 5 L0 9" fill="none" stroke="#52665b" stroke-width="1.5"/></marker><style>text{font-family:'Segoe UI',Arial,sans-serif;fill:#20362a}.title{font-size:42px;font-weight:700}.subtitle{font-size:23px;fill:#53665b}.section{font-size:25px;font-weight:700}.node-title{font-size:26px;font-weight:650}.body{font-size:21px}.small{font-size:19px;fill:#566a5e}.tag{font-size:15px;font-weight:700;letter-spacing:.6px}.label{font-size:18px;fill:#52665b}.edge{fill:none;stroke:#52665b;stroke-width:2;marker-end:url(#arrow)}.future{stroke-dasharray:8 6}</style></defs><rect width="2200" height="1940" fill="#f7f9f5"/>
+<text x="50" y="67" class="title">Architect 2.0 - engineering drawing</text>
+<text x="50" y="106" class="subtitle">Current local source, deployment boundaries and inherited multiplayer direction - 2026-10-05</text>
+<rect x="50" y="134" width="445" height="39" rx="7" fill="#edf6ef" stroke="#6c9677"/>
+<text x="67" y="160" class="tag">SOURCE IMPLEMENTED</text>
+<rect x="530" y="134" width="445" height="39" rx="7" fill="#fff3d9" stroke="#bf9c56"/>
+<text x="547" y="160" class="tag">GOOGLE DEFERRED</text>
+<rect x="1010" y="134" width="445" height="39" rx="7" fill="#f1edfb" stroke="#9a85b8"/>
+<text x="1027" y="160" class="tag">UI SIMULATION</text>
+<rect x="1490" y="134" width="445" height="39" rx="7" fill="#f3f5f6" stroke="#93a0a7"/>
+<text x="1507" y="160" class="tag">FUTURE SERVICES</text>
+<text x="50" y="205" class="small" style="fill:#855f20">New login / team / catalog schema is not claimed deployed. Development deployment approval and live multi-account checks remain pending.</text>
+<rect x="40" y="235" width="2120" height="980" rx="20" fill="#ffffff" stroke="#cbd8cb"/>
+<text x="67" y="278" class="section">01  APPLICATION AND SERVER ACCESS - IMPLEMENTED IN LOCAL SOURCE</text>
+<text x="83" y="312" class="tag">BROWSER</text>
+<text x="780" y="312" class="tag">CONVEX + BETTER AUTH SOURCE</text>
+<text x="1530" y="312" class="tag">PROVIDER / DATA</text>
+<rect x="80" y="335" width="490" height="140" rx="14" fill="#edf6ef" stroke="#6c9677" stroke-width="1.5"/>
+<text x="102" y="365" class="tag">LOCAL SOURCE</text>
+<text x="102" y="404" class="node-title">React workspace</text>
+<text x="102" y="438" class="body">Guided + Developer views</text>
+<text x="102" y="467" class="body">Login ID form - department controls</text>
+<rect x="780" y="335" width="560" height="140" rx="14" fill="#edf6ef" stroke="#6c9677" stroke-width="1.5"/>
+<text x="802" y="365" class="tag">LOCAL SOURCE</text>
+<text x="802" y="404" class="node-title">Login ID + password</text>
+<text x="802" y="438" class="body">Username plugin - cross-domain session</text>
+<text x="802" y="467" class="body">Server identity - auth rate limits</text>
+<rect x="1530" y="335" width="560" height="140" rx="14" fill="#fff3d9" stroke="#bf9c56" stroke-width="1.5"/>
+<text x="1552" y="365" class="tag">DEFERRED</text>
+<text x="1552" y="404" class="node-title">Google OAuth</text>
+<text x="1552" y="438" class="body">Optional wiring retained</text>
+<text x="1552" y="467" class="body">Credentials and provider journey deferred</text>
+<path d="M570 405 H780" class="edge"/>
+<text x="620" y="387" class="label">sign in</text>
+<path d="M1340 405 H1530" class="edge future"/>
+<text x="1360" y="387" class="label">optional provider</text>
+<rect x="80" y="525" width="490" height="175" rx="14" fill="#edf6ef" stroke="#6c9677" stroke-width="1.5"/>
+<text x="102" y="555" class="tag">LOCAL SOURCE</text>
+<text x="102" y="594" class="node-title">Draft state + save queue</text>
+<text x="102" y="628" class="body">First edit uses its snapshot revision</text>
+<text x="102" y="657" class="body">Serial writes per app - dirty / blocked</text>
+<text x="102" y="686" class="body">Hold / retry / explicit remote acceptance</text>
+<rect x="780" y="525" width="560" height="175" rx="14" fill="#edf6ef" stroke="#6c9677" stroke-width="1.5"/>
+<text x="802" y="555" class="tag">LOCAL SOURCE</text>
+<text x="802" y="594" class="node-title">Project authorization</text>
+<text x="802" y="628" class="body">Owner / workspace admin: manage</text>
+<text x="802" y="657" class="body">Department editor: update; viewer: read</text>
+<text x="802" y="686" class="body">Recheck membership and grants per call</text>
+<rect x="1530" y="525" width="560" height="175" rx="14" fill="#edf6ef" stroke="#6c9677" stroke-width="1.5"/>
+<text x="1552" y="555" class="tag">LOCAL SOURCE</text>
+<text x="1552" y="594" class="node-title">Membership and project grants</text>
+<text x="1552" y="628" class="body">workspaces + departments</text>
+<text x="1552" y="657" class="body">workspaceMembers + projectGrants</text>
+<text x="1552" y="686" class="body">Project grants are not agent invoke grants</text>
+<path d="M1060 475 V525" class="edge"/>
+<text x="1080" y="509" class="label">validated session</text>
+<path d="M1340 610 H1530" class="edge"/>
+<text x="1365" y="590" class="label">role / grant lookup</text>
+<rect x="80" y="750" width="490" height="140" rx="14" fill="#edf6ef" stroke="#6c9677" stroke-width="1.5"/>
+<text x="102" y="780" class="tag">LOCAL SOURCE</text>
+<text x="102" y="819" class="node-title">Guest demo + source import</text>
+<text x="102" y="853" class="body">Browser-local storage; separate workspace</text>
+<text x="102" y="882" class="body">Bounded files / ZIP; credentials excluded</text>
+<rect x="80" y="940" width="490" height="175" rx="14" fill="#edf6ef" stroke="#6c9677" stroke-width="1.5"/>
+<text x="102" y="970" class="tag">LOCAL SOURCE</text>
+<text x="102" y="1009" class="node-title">Isolated HTML preview</text>
+<text x="102" y="1043" class="body">srcDoc - opaque origin - allow-scripts</text>
+<text x="102" y="1072" class="body">CSP restricts APIs, resources and forms</text>
+<text x="102" y="1101" class="body">No server / Python / framework runtime</text>
+<path d="M326 700 V728 H56 V1018 H80" class="edge"/>
+<text x="58" y="929" class="label">HTML</text>
+<rect x="780" y="750" width="560" height="350" rx="14" fill="#edf6ef" stroke="#6c9677" stroke-width="1.5"/>
+<text x="802" y="780" class="tag">LOCAL SOURCE</text>
+<text x="802" y="819" class="node-title">Authorized project operations</text>
+<text x="802" y="853" class="body">list: lightweight authorized project cards</text>
+<text x="802" y="882" class="body">watch: active full project or null on loss</text>
+<text x="802" y="911" class="body">get: explicit authorized full lookup</text>
+<text x="802" y="940" class="body">update: compare expectedRevision first</text>
+<text x="802" y="969" class="body">Conflict rejects; success increments revision</text>
+<text x="802" y="998" class="body">create / update / archive synchronize catalog</text>
+<text x="802" y="1027" class="body">No merge engine or simultaneous co-editing</text>
+<rect x="1530" y="750" width="560" height="350" rx="14" fill="#edf6ef" stroke="#6c9677" stroke-width="1.5"/>
+<text x="1552" y="780" class="tag">LOCAL SOURCE</text>
+<text x="1552" y="819" class="node-title">Project storage + catalog</text>
+<text x="1552" y="853" class="body">projects: source, settings, messages, versions</text>
+<text x="1552" y="882" class="body">stateJson limited to 600 KB; no credentials</text>
+<text x="1552" y="911" class="body">projectCatalog: bounded metadata only</text>
+<text x="1552" y="940" class="body">Legacy absent revision interpreted as zero</text>
+<text x="1552" y="969" class="body">Explicit backfill: at most 5 projects per call</text>
+<text x="1552" y="998" class="body">No automatic backfill on deployment</text>
+<text x="1552" y="1027" class="body">Schema / functions deployment pending</text>
+<path d="M1060 700 V750" class="edge"/>
+<text x="1080" y="731" class="label">authorized calls</text>
+<path d="M1340 913 H1530" class="edge"/>
+<text x="1360" y="891" class="label">query / mutation</text>
+<path d="M570 615 H658 V839 H780" class="edge"/>
+<text x="591" y="816" class="label">draft + revision</text>
+<path d="M780 1030 H710 V666 H570" class="edge"/>
+<text x="573" y="1055" class="label">result / conflict</text>
+<rect x="80" y="1136" width="2010" height="49" rx="10" fill="#fff5df" stroke="#e0c995"/>
+<text x="101" y="1168" class="small" style="fill:#765b26">SOURCE IS NOT LIVE PROOF  |   Account/draft recovery and revoked-access UI need final checks. Older owner-only deployment evidence does not verify these changes.</text>
+<rect x="40" y="1255" width="2120" height="575" rx="20" fill="#ffffff" stroke="#bdc8cf" stroke-dasharray="8 5"/>
+<text x="67" y="1297" class="section">02  DEPARTMENT-OWNED AGENT REUSE - KEEP PROJECT ACCESS AND RUNTIME PERMISSIONS SEPARATE</text>
+<rect x="80" y="1335" width="600" height="175" rx="14" fill="#edf6ef" stroke="#6c9677" stroke-width="1.5"/>
+<text x="102" y="1365" class="tag">LOCAL SOURCE</text>
+<text x="102" y="1404" class="node-title">Project collaboration foundation</text>
+<text x="102" y="1438" class="body">LOCAL SOURCE: department project roles</text>
+<text x="102" y="1467" class="body">Revision-conflict rejection; live checks pending</text>
+<text x="102" y="1496" class="body">Comments / presence / co-editing still proposed</text>
+<rect x="800" y="1335" width="570" height="175" rx="14" fill="#f3f5f6" stroke="#93a0a7" stroke-width="1.5" stroke-dasharray="8 5"/>
+<text x="822" y="1365" class="tag">PROPOSED</text>
+<text x="822" y="1404" class="node-title">Department-owned agent registry</text>
+<text x="822" y="1438" class="body">Stable ID - immutable version - typed contract</text>
+<text x="822" y="1467" class="body">Owner-controlled Studio releases</text>
+<text x="822" y="1496" class="body">Real invocation grants remain future work</text>
+<rect x="1490" y="1335" width="600" height="175" rx="14" fill="#f1edfb" stroke="#9a85b8" stroke-width="1.5"/>
+<text x="1512" y="1365" class="tag">FICTIONAL UI</text>
+<text x="1512" y="1404" class="node-title">AgentLibrary demonstration</text>
+<text x="1512" y="1438" class="body">Fictional Support Builder / Finance Owner</text>
+<text x="1512" y="1467" class="body">Local request, approval and contract fixture</text>
+<text x="1512" y="1496" class="body">No server grant or live agent invocation</text>
+<path d="M680 1410 H800" class="edge future"/>
+<text x="690" y="1390" class="label">future link</text>
+<text x="83" y="1534" class="tag">PROPOSED EXECUTION PATH - NO CUSTOMER RUNTIME CONNECTED</text>
+<rect x="80" y="1560" width="400" height="150" rx="14" fill="#f3f5f6" stroke="#93a0a7" stroke-width="1.5" stroke-dasharray="8 5"/>
+<text x="102" y="1590" class="tag">PROPOSED</text>
+<text x="102" y="1629" class="node-title">Support agent</text>
+<text x="102" y="1663" class="body">Trusted identity + case</text>
+<text x="102" y="1692" class="body">No Finance edit rights</text>
+<rect x="560" y="1560" width="490" height="150" rx="14" fill="#f3f5f6" stroke="#93a0a7" stroke-width="1.5" stroke-dasharray="8 5"/>
+<text x="582" y="1590" class="tag">PROPOSED</text>
+<text x="582" y="1629" class="node-title">Invocation authorization</text>
+<text x="582" y="1663" class="body">Check grant, action and case scope</text>
+<text x="582" y="1692" class="body">Deny unlisted actions; log decision</text>
+<rect x="1130" y="1560" width="440" height="150" rx="14" fill="#f3f5f6" stroke="#93a0a7" stroke-width="1.5" stroke-dasharray="8 5"/>
+<text x="1152" y="1590" class="tag">PROPOSED</text>
+<text x="1152" y="1629" class="node-title">Finance-owned agent</text>
+<text x="1152" y="1663" class="body">Pinned released version</text>
+<text x="1152" y="1692" class="body">Approved invoice-status capability</text>
+<rect x="1650" y="1560" width="440" height="150" rx="14" fill="#f3f5f6" stroke="#93a0a7" stroke-width="1.5" stroke-dasharray="8 5"/>
+<text x="1672" y="1590" class="tag">PROPOSED</text>
+<text x="1672" y="1629" class="node-title">Protected tool + billing</text>
+<text x="1672" y="1663" class="body">Recheck access; filter returned fields</text>
+<text x="1672" y="1692" class="body">Credentials stay inside runtime</text>
+<path d="M480 1635 H560" class="edge future"/>
+<path d="M1050 1635 H1130" class="edge future"/>
+<path d="M1570 1635 H1650" class="edge future"/>
+<path d="M1085 1510 V1540 H805 V1560" class="edge future"/>
+<text x="1098" y="1544" class="label">version + invocation grant</text>
+<text x="83" y="1760" class="body">Project editor/viewer grants do not grant agent invocation rights, Finance credentials, memory access or refund authority.</text>
+<text x="83" y="1794" class="small">Build, tests, GitHub, connectors and deployment UX still use clearly labeled simulations. Production services have a separate proposed architecture.</text>
+<text x="50" y="1882" class="small">Sources: src/app.tsx - src/lib/project-save-queue.ts - src/convex/{auth,access,teams,projects,catalog,schema}.ts - agent-library.tsx</text>
+<text x="50" y="1914" class="small">Companion Markdown links exact source boundaries, inherited product direction and pending verification. No live auth/team/schema deployment is claimed.</text>
 </svg>

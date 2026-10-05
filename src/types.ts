@@ -20,12 +20,21 @@ export interface Project {
   id: string; title: string; description: string; framework: Framework;
   updatedAt: number; stage: AppStage; source: 'prompt' | 'import' | 'template';
   color: string; state: WorkspaceState;
+  ownerId?: string;
+  revision?: number;
+  stateLoaded?: boolean;
+  invalidStateJson?: string;
+  savedVersionCount?: number;
+  access?: { role: 'owner' | 'editor' | 'viewer'; departmentName?: string; ownerDepartment?: string; workspaceName?: string; workspaceId?: string };
 }
 export interface WorkspaceProps {
   project: Project;
-  onChange: (project: Project) => void;
+  onChange: (project: Project) => boolean;
   onBack: () => void;
   expert: boolean;
   onExpertChange: (expert: boolean) => void;
   notify: (message: string) => void;
+  onManageAccess?: () => void;
+  sourceDraft?: { path: string; content: string } | null;
+  onSourceDraftChange?: (draft: { path: string; content: string } | null) => void;
 }

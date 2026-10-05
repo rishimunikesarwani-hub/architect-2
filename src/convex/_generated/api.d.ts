@@ -11,6 +11,8 @@
 import type * as auth from "../auth.js";
 import type * as http from "../http.js";
 import type * as projects from "../projects.js";
+import type * as teams from "../teams.js";
+import type * as catalog from "../catalog.js";
 
 import type {
   ApiFromModules,
@@ -22,6 +24,8 @@ declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   http: typeof http;
   projects: typeof projects;
+  teams: typeof teams;
+  catalog: typeof catalog;
 }>;
 
 /**

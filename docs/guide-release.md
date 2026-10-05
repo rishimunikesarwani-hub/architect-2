@@ -1,5 +1,8 @@
 # Architect 2.0 release handoff
 
+> Current scope update (2026-10-05): the user deferred Google OAuth and explicitly chose real login ID/password accounts with shared department app data. This supersedes the older Google-blocked and owner-only statements below. Local implementation and tests are in place; the additive development schema update and live two-session acceptance await approval. See [department verification](../evals/2026-10-05-department-multiplayer.md) and [current backend setup](guide-backend-setup.md). Historical browser evidence below stays historical.
+
+
 The complete hiring brief requests a live app URL, a GitHub repository, an architecture diagram and an accompanying Markdown explanation. Publishing and assignment submission are separate actions. The user requires approval before a production deployment; no submission is authorized.
 
 ## Prepared locally
@@ -17,11 +20,11 @@ Proposed new Vercel project: `architect-2`, deployed independently from the exis
 
 Verify both names are available before publishing; no remote repository or hosting project has yet been created by this handoff.
 
-## Google setup for a hosted app
+## Authentication for a hosted app
 
 The current Convex development backend trusts `http://localhost:5177`. A hosted site's exact HTTPS origin must be deliberately added to the auth configuration before offering live login there. Do not copy credentials from another application or set the client secret in a Vite/browser environment variable.
 
-Keep the first public demo disconnected from the backend unless its origin has been configured and the real Google round trip tested. The OAuth callback remains on the selected Convex HTTP deployment; the frontend return URL and allowed origin change with the chosen site. Follow `guide-backend-setup.md` for the current local flow, then document the approved hosted origin and repeat the same acceptance checks.
+Keep the first public demo disconnected from the backend unless its origin has been configured and the real login-ID/password round trip tested. Google is optional and deferred. If enabled later, its OAuth callback remains on the selected Convex HTTP deployment; the frontend return URL and allowed origin change with the chosen site. Follow `guide-backend-setup.md` for the current local flow, then document the approved hosted origin and repeat the same acceptance checks.
 
 ## Release verification
 

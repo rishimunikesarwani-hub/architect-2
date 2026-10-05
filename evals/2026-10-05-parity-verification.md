@@ -1,6 +1,6 @@
 # Extended feature verification - 2026-10-05
 
-This continues the earlier browser record after reading the complete hiring brief and adding source-product feature flows. Results below were observed and reported by the main agent in Chrome; the audit agent recorded them without repeating browser operations. These are local prototype checks, not proof of connected production services.
+This continues the earlier browser record after reading the complete hiring brief and adding source-product feature flows. Browser results below were observed and reported by the main agent in Chrome; the audit agent recorded them without repeating browser operations. The later supplied Markdown download was independently read and hash-checked on disk. These are local prototype checks, not proof of connected production services.
 
 | Flow | Observed browser evidence |
 | --- | --- |
@@ -8,7 +8,7 @@ This continues the earlier browser record after reading the complete hiring brie
 | Framework switch | Changed the built plan from LangGraph to Custom. Project source was retained, runtime execution was disclaimed, and the plan returned to draft review. |
 | Design system | Saved Cobalt studio and applied it to Payment status workflow. Found and fixed a selector that missed the sample's primary button. Reapplying produced the expected computed button color `rgb(71, 100, 173)`. A source checkpoint was retained. |
 | Build artifacts | Generated a project-derived Markdown brief and Mermaid diagram, then saved both as new source files. Existing files were preserved. |
-| Artifact download | Clicked Download brief, but the browser download event timed out. The browser safety policy then blocked opening `chrome://downloads/` because only HTTP/HTTPS URLs were permitted. Actual arrival in the Downloads folder remains unconfirmed. No security setting was bypassed. |
+| Artifact download | **Markdown brief arrival verified by the subsequently supplied file.** The user supplied `payment-status-workflow-brief.md` from Downloads, and the preserved [project copy](../docs/ref-payment-status-workflow-brief.md) matches its 1,569 bytes and SHA-256 hash. The earlier Download brief browser event timed out and policy blocked `chrome://downloads/` because only HTTP/HTTPS URLs were permitted; that historical attempt was inconclusive, and no security setting was bypassed. This verifies this Markdown brief only, not ZIP export or other downloads. |
 | GitAgent files | Saved instructions, example configuration and handoff guide in project source. UI clearly identifies the format as illustrative and unexecuted. |
 | Studio handoff | Changed the existing Payment status workflow agent's role in the in-app Studio view. The Agents panel displayed that new role and still contained exactly two agents, confirming the same-agent edit. |
 | Sharing invitation | Added `reviewer@example.com` with Editor in the sharing simulation. People with access showed the entry, persisted it, and explicitly stated that no email was sent. |
@@ -27,7 +27,9 @@ This continues the earlier browser record after reading the complete hiring brie
 
 The final independent automated run after the implementation agents stopped passed all 19 tests across 3 files and `npm run build`. Production Markdown/SVG and prototype SVG copies in public and build output matched their source hashes. See the [requirement audit](2026-10-05-requirement-audit.md) for the exact automated checks; passing those checks is separate from the browser evidence above.
 
-Google credentials remain absent. Real Google sign-in, authenticated browser-to-Convex persistence and two-account isolation remain pending guided setup. Public release and repository publication remain approval-pending, and the hiring form has not been submitted. The local file-upload picker remains blocked by the extension's file-URL permission; import parser tests pass. Actual download arrival and added-modal mobile layout remain unconfirmed as described above.
+Google credentials remain absent. Real Google sign-in, authenticated browser-to-Convex persistence and two-account isolation remain pending guided setup. Public release and repository publication remain approval-pending, and the hiring form has not been submitted. The local file-upload picker remains blocked by the extension's file-URL permission; import parser tests pass. This Markdown brief's arrival is now verified; other downloads and added-modal mobile layout remain unconfirmed.
+
+The supplied `Downloads/payment-status-workflow-brief.md` and `docs/ref-payment-status-workflow-brief.md` both have SHA-256 `3220af33a43e34e2647593636604173a13bc770d6980e0f1f9dd1c15128b47a4` and length 1,569 bytes. Reading the artifact confirms a project-derived LangGraph sample in draft state with six source files and no saved plan. It describes simulated Payment status reuse pinned to version 1.2; it is a historical project snapshot, not the current workspace state or proof of runtime execution. The original Downloads file was preserved. No test, build, code change or commit was needed for this evidence update.
 
 ## Architecture review
 

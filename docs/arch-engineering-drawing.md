@@ -1,133 +1,153 @@
 # Architect 2.0 engineering drawing
 
-Snapshot: 2026-10-05. This records the current assignment prototype and the previously discussed multiplayer direction. It is not a new blueprint or a claim of production readiness. The user explicitly skipped blueprint; simulated feature flows are permitted by the assignment.
+Snapshot: 2026-10-05. This records the current local source and the previously discussed multiplayer direction. **Login ID/password, department permissions, metadata subscriptions and revision-conflict handling are implemented in local source; the new development schema/functions still await approval to deploy and live verification.** Google setup is deferred. This is not a new blueprint or a production-readiness claim; the assignment permits simulated feature flows.
 
 ![Architect 2.0 engineering map](arch-engineering-drawing.svg)
 
-[Open the full-size vector drawing](arch-engineering-drawing.svg).
+[Open the full-size vector drawing](arch-engineering-drawing.svg) | [PNG](arch-engineering-drawing.png). The separate [production architecture](arch-production-architecture.md) describes the proposed hosted runtime.
 
 ## How to read the drawing
 
 | Status | Meaning |
 |---|---|
-| Implemented | Present in inspected source. Live verification is separately identified below. |
-| Credentials pending | Google/Better Auth integration exists, but the real Google round trip and browser-to-cloud persistence have not been completed. |
-| Simulated | The UI saves and displays a demonstration outcome; no model, GitHub write, external tool, invitation or public deployment runs. |
-| Proposed multiplayer | Inherited product direction and a proposed engineering path. No shared-membership backend, simultaneous editing, permissioned agent reuse or customer runtime is implemented. |
+| Local source | Inspected implementation exists. New auth/team/catalog/schema changes are not claimed deployed or verified with live accounts. |
+| Deferred Google | Optional provider wiring remains; credentials and a Google round trip are not part of the completed verification. |
+| Simulated | A UI demonstration updates prototype state. No live model, GitHub write, external tool, email invitation or app deployment runs. |
+| Proposed | Agent registry, runtime invocation grants, protected execution, comments and simultaneous co-editing remain future work. |
+
+An older owner-only development backend was deployed earlier. That historical check does not establish that the newly written department or login-ID code is running there.
 
 ## Current application architecture
 
 ```mermaid
 flowchart LR
-  classDef built fill:#edf6ef,stroke:#408157,color:#1c3926
+  classDef local fill:#edf6ef,stroke:#408157,color:#1c3926
   classDef pending fill:#fff3d9,stroke:#c39336,color:#684817
   classDef simulated fill:#f1edfb,stroke:#8a73b4,color:#493466
   classDef future fill:#f3f5f6,stroke:#879399,stroke-dasharray:6 4,color:#35434b
 
-  subgraph Browser[Browser - React application]
-    UI[Guided and Developer views<br/>same project state]:::built
-    State[Project state and save queue<br/>owner epoch + write revision]:::built
-    Local[(Guest demo localStorage)]:::built
-    Import[Local source / ZIP import<br/>300 KB source limit + excluded paths]:::built
-    Preview[Opaque-origin HTML iframe<br/>allow-scripts + CSP]:::built
-    Sim[Scripted build, tests, GitHub,<br/>tools, sharing and deployment]:::simulated
+  subgraph Browser["Browser - local frontend source"]
+    UI["Guided / Developer workspace<br/>login ID form + department controls"]:::local
+    State["ProjectSaveQueue + draft state<br/>per-project writes, expected revision<br/>dirty / blocked / hold / explicit recovery"]:::local
+    Local[("Guest demo localStorage")]:::local
+    Import["Local files / ZIP import<br/>bounded source, excludes secrets"]:::local
+    Preview["Opaque-origin HTML iframe<br/>allow-scripts + restrictive CSP"]:::local
+    Sim["Build / test / GitHub / deploy<br/>fictional AgentLibrary personas and grants"]:::simulated
     UI --> State
     UI -->|guest only| Local
     Import --> State
-    State -->|selected HTML via srcDoc| Preview
-    Sim -->|updates actual prototype state| State
+    State -->|HTML via srcDoc| Preview
+    Sim -->|prototype state only| State
   end
 
-  subgraph Cloud[Dedicated Convex development deployment]
-    Auth[Better Auth component<br/>sessions + cross-domain integration]:::built
-    API[Project query and mutation functions<br/>derive identity from validated session<br/>owner-scoped read / write / archive]:::built
-    DB[(projects collection<br/>ownerId, metadata, stateJson<br/>600 KB state limit)]:::built
-    Auth -->|validated identity| API
-    API --> DB
+  subgraph Backend["Backend local source - development deployment approval pending"]
+    Auth["Better Auth + username plugin<br/>login ID / password, session identity<br/>cross-domain bridge + auth rate limits"]:::local
+    Access["Server authorization<br/>owner or workspace administrator<br/>department grant: editor / viewer"]:::local
+    Query["list: authorized metadata only<br/>watch: active authorized full project<br/>get: authorized explicit lookup"]:::local
+    Write["Mutations: authorization + expectedRevision<br/>conflict rejects write; success increments revision"]:::local
+    Team["Workspace / department administration<br/>existing-account assignment and app grants"]:::local
+    Roles[("workspaces / departments<br/>workspaceMembers / projectGrants")]:::local
+    DB[("projects: source + stateJson<br/>projectCatalog: lightweight cards")]:::local
+    Auth -->|validated identity| Access
+    Access --> Query
+    Access --> Write
+    Access --> Team
+    Team --> Roles
+    Roles -->|membership / grant lookup| Access
+    Query --> DB
+    Write -->|same mutation updates catalog| DB
   end
 
-  Google[Google OAuth<br/>credentials and real round trip pending]:::pending
-  UI -. sign-in / callback .-> Auth
-  Auth <-. provider exchange .-> Google
-  State -->|authenticated CRUD| API
-  DB -->|reactive query result via API| State
-  Local -. no automatic migration .- State
+  Google["Google OAuth deferred<br/>provider configuration / browser proof pending"]:::pending
+  UI -->|login ID / password| Auth
+  Auth -. optional provider .-> Google
+  State -->|draft + expected revision| Write
+  UI -->|catalog + active project subscriptions| Query
+  Query -->|authorized results; watch null on lost access| State
+  Write -->|revision or conflict| State
 ```
 
-The frontend starts with browser-local demo projects. Once a validated user is available, it switches to that user's Convex projects. Demo data is not automatically uploaded to a new account. The current UI separates the demo and cloud workspaces rather than implementing a general migration service. [Client state and authentication handoff](../src/app.tsx), [provider](../src/lib/backend-provider.tsx).
+The frontend keeps guest demo data separate from authenticated projects; it does not automatically upload guest projects. Login ID/password forms use Better Auth's username plugin and the existing Convex session integration. Account identity comes from the server session, not a caller-supplied owner, department or role. Google remains optional and deferred. Email verification and password-reset delivery are not configured. Readiness reports configuration presence, not a successful live sign-in. [Client bridge and project handoff](../src/app.tsx), [login form](../src/components/department-auth.tsx), [auth configuration](../src/convex/auth.ts), [auth client](../src/lib/auth-client.ts).
 
-`projects.create` derives `ownerId` from the authenticated server context; clients cannot choose it. `list` filters by the owner. `get`, `update` and `archive` check the same owner and hide absent, foreign and archived records behind the same error. `stateJson` contains messages, source files, agent settings, versions and simulated activity—not credentials. [Backend operations](../src/convex/projects.ts), [schema](../src/convex/schema.ts).
+### Project permissions and data boundaries
 
-The client queue prevents earlier acknowledgements from clearing newer unsaved edits in the same browser view. Owner-epoch checks prevent queued work from being attached to a later authentication session. These protections are **not** a distributed editing protocol: the backend currently patches one document without an expected-revision comparison, merge engine, project-membership table or collaborator roles. [Client save queue](../src/app.tsx), [backend update](../src/convex/projects.ts).
+`projectAccessFor` grants owner access to the project owner or its workspace administrator. Other workspace members need a matching grant for their department in the same workspace: viewer can read; editor can update. Management requires owner/admin access. An email address, self-declared role or LLM response cannot confer rights. Membership changes and grant revocation are checked by reactive queries and each mutation. [Authorization helper](../src/convex/access.ts), [department mutations](../src/convex/teams.ts), [department UI](../src/components/department-access.tsx).
 
-The iframe uses `sandbox="allow-scripts"` without `allow-same-origin`; supplied HTML is parsed before a restrictive CSP is inserted. This isolates host-origin cookies/storage and restricts resource loading, network APIs and forms. It is not a server sandbox, framework runner or complete network-isolation boundary: a script may still navigate its own frame. The prototype previews HTML; React/Python/server processes are not executed. [Preview implementation](../src/components/workspace.tsx).
+The metadata catalog contains title, bounded description, framework, stage, revision and presentation/count fields, but no complete `stateJson`. `projects.list` returns authorized card metadata. `projects.watch` returns the active authorized full project or null when it is unavailable/unauthorized, so revocation need not throw through the render tree. `get` remains an explicit authorized full lookup. Full project documents contain source files, messages, settings, sample agents and checkpoints, with a 600 KB state limit. These are real access/persistence mechanisms in source, not agent-execution infrastructure. [Project functions](../src/convex/projects.ts), [catalog helpers](../src/convex/catalog.ts), [schema](../src/convex/schema.ts).
 
-The backend setup guide records a deployed **development** backend, anonymous-access rejection and an empty live session endpoint with the configured CORS origin. In-memory tests cover owner access, expiry and persistence. Google readiness was false because client credentials were absent; a real provider round trip, reload, sign-out and second-account isolation remain pending. No production deployment is claimed. [Setup and verification record](guide-backend-setup.md), [backend tests](../tests/backend-projects.test.ts).
+Create/update/archive and workspace attachment synchronize `projectCatalog` with the full project in the same mutation. Legacy documents permit missing revision, interpreted as zero. The explicit internal `catalog.backfillLegacy` operation processes at most five legacy source documents per call; it is not auto-run at deployment. A bounded owner-only list fallback covers five legacy documents during transition. Deploying the schema and executing any backfill still require the applicable approval; this drawing does not claim either happened.
+
+### Saves, conflict handling and draft recovery
+
+The backend compares `expectedRevision` before modifying a project, rejects a mismatch with `REVISION_CONFLICT`, and increments revision on success. This prevents an older full-state save from silently replacing a newer server document. Permissions are checked before the revision comparison. This is optimistic concurrency, not a merge engine or character-by-character collaboration. [Update mutation](../src/convex/projects.ts).
+
+`ProjectSaveQueue` serializes writes per project while allowing other projects to progress. Already-dirty same-client edits chain the revisions acknowledged by successful writes. A first clean draft uses its own supplied revision, so a newer subscription arriving before the UI applies its contents cannot authorize overwriting that unseen version. Subscriptions cannot advance a dirty/blocked baseline. Failure retains dirty status, drops scheduled older snapshots and blocks that project; retry keeps the previous baseline. `hold` restores an unsaved draft without writing. `acceptRemote` installs an explicitly accepted baseline after the caller preserves/discards its local copy; `reset` invalidates callbacks from the previous account. Neither method cancels a request already sent to the server. [Queue implementation](../src/lib/project-save-queue.ts), [11 focused queue tests](../tests/project-save-queue.test.ts).
+
+The app integrates explicit retry and preservation as a private copy. Account handoff, revocation and unsaved-editor guards are being integrated and require final browser checks; do not interpret the queue tests as proof of those complete UI journeys. In-memory recovery does not survive closing or reloading a tab. [App integration](../src/app.tsx), [source editor](../src/components/workspace.tsx).
+
+**Technical:** A revision is the version number of the shared project document. An editor saves against the version they actually edited; if another user saved first, the server rejects the stale write and the draft needs recovery/review.
+
+**ELI10:** Two people can open the same page. The second person cannot quietly erase the first person's newer work by saving an old copy.
+
+### Preview and verification boundary
+
+The iframe uses `sandbox="allow-scripts"` without `allow-same-origin`; supplied HTML is parsed before a restrictive CSP is inserted. This isolates host cookies/storage and restricts resource loading, network APIs and forms. It is not a server sandbox, framework runner or complete network-isolation boundary: a script may still navigate its own frame. React/Python/server processes are not executed. [Preview implementation](../src/components/workspace.tsx).
+
+Backend access/auth tests exercise local in-memory behavior. The focused queue suite passed 11 tests in this source-review pass. No deployment or live login/department session was performed for this drawing update. Required proof after approved deployment includes two real accounts, editor/viewer denial, revocation, same-project stale-save rejection and recovery, sign-out/session restore, and the metadata-to-full-project transition. These checks validate the implemented mechanism; they do not require deploying the proposed agent runtime. [Backend tests](../tests/backend-teams.test.ts), [auth tests](../tests/backend-auth.test.ts).
 
 ## Multiplayer direction inherited from prior work
 
-The earlier deck brief records Rishi's explicit decisions: a shared Architect–Studio workspace; **each department owns its own agents**, while other teams reuse them through permissions in a structured schema; Support–Finance as the running example; and a small customer pilot as the proposed next step. These are accepted product-direction choices, not evidence of a built service or an approved production schema. Deck brief: Confirmed decisions, Ownership decision and Running-example decision (historical local source: `Research_Data/multiplayer-agent-deck/deck-brief.md`; outside this repository), deck plan (historical local source: `Research_Data/multiplayer-agent-deck/deck-plan.md`; outside this repository).
+The earlier deck brief records Rishi's decisions: a shared Architect-Studio workspace; **each department owns its own agents**, while other teams reuse them through permissions in a structured schema; Support-Finance as the running example; and a small customer pilot as the proposed next step. Historical sources outside this repository: `Research_Data/multiplayer-agent-deck/deck-brief.md` (Confirmed decisions, Ownership decision, Running-example decision) and `deck-plan.md`. These are product-direction choices, not evidence of a deployed registry or an approved production schema.
 
-The subsequent architecture explicitly marks itself **proposed**. Its shared-workspace section calls for server-stored drafts, comments and conflicting-save rejection; character-by-character co-editing is deferred. Its registry/grant/role details, concrete fields, OpenController adapter and customer runtime remain engineering proposals. Prior architecture: sections 1, 4, 5, 7 and 8 (historical local source: `architecture.md`; outside this repository). A separate GitHub-submission copy (historical local source: `github-submission/architecture.md`; outside this repository) also states proposed status; it was inspected as a second artifact, not assumed to be byte-identical.
+The inherited `architecture.md` and `github-submission/architecture.md` explicitly describe proposed services: server drafts, comments, conflicting-save rejection, a department-owned agent registry, invocation grants, Studio/OpenController adapters and customer runtime. The current source now implements project membership/department grants and revision rejection; the registry and execution services remain proposed. A project editing grant is not an agent invocation grant.
 
-The current [Agent library component](../src/components/agent-library.tsx) implements a **UI simulation** of that direction: switch between fictional Support Builder and Finance Owner, inspect a versioned contract, request access, approve/deny it, and validate sample JSON before returning a fixed fixture. Role and request state remain in the browser's `architect-2-library-simulation-v1` storage. Reuse sends the selected owner, version, capability and contract into a new project's prompt; it is not a live shared-agent reference or an enforced cross-user grant. A signed-in user may save that resulting prototype project through the ordinary owner-only Convex path. This is separate from real membership, simultaneous editing or a shared registry.
+The [Agent library component](../src/components/agent-library.tsx) remains a **fictional UI simulation**: Support Builder and Finance Owner are browser personas, request/approval state is in `architect-2-library-simulation-v1`, sample JSON validation returns a fixed fixture, and reuse creates a project from the selected contract/prompt. Its approvals do not write `projectGrants`, create real membership, authorize runtime access or connect a live Finance agent. A signed-in account may save the resulting prototype project through ordinary project persistence.
 
 ```mermaid
 flowchart LR
   classDef proposed fill:#f3f5f6,stroke:#879399,stroke-dasharray:6 4,color:#35434b
-  classDef direction fill:#f1edfb,stroke:#8a73b4,color:#493466
-
-  subgraph Design[PROPOSED - development-time collaboration]
-    People[Support + Finance collaborators]:::direction
-    Shared[Shared Architect project<br/>members, roles, comments, activity]:::proposed
-    Drafts[Server-stored drafts<br/>expected revision + conflict diff<br/>human reconcile before save]:::proposed
-    Registry[Agent registry<br/>department owner + immutable version<br/>structured input/output contract]:::proposed
-    Studio[Studio edit / evaluate / release<br/>owning department controls changes]:::proposed
-    Grants[Explicit owner-approved grants<br/>invoke scope differs from edit scope]:::proposed
-    People -.-> Shared
-    Shared -.-> Drafts
-    Shared -. references .-> Registry
-    Studio -. approved version .-> Registry
-    Registry -.-> Grants
-  end
-
-  subgraph Runtime[PROPOSED - runtime reuse, separate from co-editing]
-    Support[Support agent]:::proposed
-    Gate[Invocation + authorization boundary<br/>trusted identity, tenant, grant,<br/>action and customer scope]:::proposed
-    Finance[Finance-owned invoice agent<br/>pinned version]:::proposed
-    Tool[Protected tool/API boundary<br/>recheck access; filter fields]:::proposed
-    Billing[(Customer billing system<br/>read-only invoice status)]:::proposed
-    Audit[Redacted decisions and outcomes<br/>OpenController adapter unverified]:::proposed
-    Support -.-> Gate
-    Gate -. allow only .-> Finance
-    Finance -.-> Tool
-    Tool -. allowed read .-> Billing
-    Gate -. decision .-> Audit
-    Tool -. decision .-> Audit
-  end
-
-  Grants -. evaluated on every protected call .-> Gate
-  Grants -. rechecked .-> Tool
+  classDef simulated fill:#f1edfb,stroke:#8a73b4,color:#493466
+  classDef local fill:#edf6ef,stroke:#408157,color:#1c3926
+  Projects["LOCAL SOURCE<br/>department project roles<br/>server revision conflict checks"]:::local
+  Library["SIMULATION<br/>fictional Support / Finance review<br/>no enforced invocation grant"]:::simulated
+  Registry["PROPOSED agent registry<br/>department owner + immutable version<br/>structured input/output contract"]:::proposed
+  Studio["PROPOSED Studio release adapter<br/>owner controls version changes"]:::proposed
+  Grants["PROPOSED invocation grants<br/>scope / resource / expiry / revocation"]:::proposed
+  Support["PROPOSED Support agent"]:::proposed
+  Gate["PROPOSED runtime authorization<br/>trusted identity + grant + case scope"]:::proposed
+  Finance["PROPOSED Finance agent<br/>pinned released version"]:::proposed
+  Tool["PROPOSED protected tool boundary<br/>recheck access; filter fields"]:::proposed
+  Billing[("Customer billing system")]:::proposed
+  Audit["PROPOSED redacted runtime audit"]:::proposed
+  Projects -. future references .-> Registry
+  Studio -. release .-> Registry
+  Registry -.-> Grants
+  Support -.-> Gate
+  Grants -. enforce each call .-> Gate
+  Gate -. allow .-> Finance
   Registry -. pin .-> Finance
-  Audit -. observable activity .-> Shared
+  Finance -.-> Tool
+  Grants -. recheck .-> Tool
+  Tool -. allowed read .-> Billing
+  Gate -. decision .-> Audit
+  Tool -. outcome .-> Audit
 ```
 
-**Technical:** Being a project member, editing an agent and invoking an agent are separate permissions. A proposed Support member could invoke Finance's released invoice-status action for an authorized case without acquiring Finance edit rights, credentials, memory or refund authority. Server-enforced grants and protected tools decide access; an LLM's approval text cannot grant it.
+**Technical:** Project membership, editing an agent's definition and invoking its released capability are different permissions. The new project roles do not implement the proposed runtime authorization.
 
-**ELI10:** Support can ask Finance's specialist an allowed question. It cannot rewrite that specialist's rules or open Finance's whole filing cabinet.
-
-For this assignment, a truthful multiplayer prototype can show collaborator presence samples, department ownership, a permission request, a version comparison/conflict, and a Support–Finance run with allow/deny outcomes. Each remains labeled simulated until backed by real membership, authorization and runtime behavior. Do not silently turn the current single-owner Convex project table into evidence that collaboration already works.
+**ELI10:** Giving Support permission to edit a project does not give it Finance's account keys or permission to issue refunds.
 
 ## Current versus future state
 
-| Boundary | Current source | Proposed extension |
+| Boundary | Current local source | Still proposed or pending |
 |---|---|---|
-| Workspace access | One authenticated owner per Convex project | Project membership and role checks on every shared read/write |
-| Editing | Local state, same-view save queue, file checkpoints | Server revision comparison, conflict diff/reconcile, comments; later optional simultaneous editing |
-| Agent ownership | Editable per-project sample agent list | Stable agent identity, department owner, maintainers, releases and contract references |
-| Reuse permissions | Browser-local Support/Finance role switch, version-specific request/approve/deny, input validation and fixed fixture; connector scopes and sharing preferences also simulated | Separately approved invocation grants with action, resource, fields, expiry and revocation |
-| Execution | Scripted browser build/test/tool/deploy outcomes | Tested runtime adapters, invocation/tool gates and customer-owned credentials |
-| Activity | Local/project messages and demonstration traces | Separate collaboration events and runtime audit events; no hidden chain-of-thought |
-| Studio/OpenController | Concept links and inherited proposed responsibilities | Vendor-supported shared identity and adapter contracts, still to be validated |
+| Authentication | Login ID/password via Better Auth, session identity and configured auth rate limits | Approved dev deployment and live account proof; Google deferred; email/reset delivery absent |
+| Project access | Owner/workspace-admin management; department editor/viewer grants and revocation checks | Live two-account enforcement proof |
+| Data loading | Lightweight authorized catalog; active authorized full-project watch; explicit legacy backfill code | Approved schema/backfill and final browser transition proof |
+| Editing | Expected-revision mutation checks; per-project client queue, hold/retry and recovery integration | Final UI recovery/revocation proof; conflict diff/merge, comments and simultaneous editing remain proposed |
+| Agent ownership | Per-project sample agents; fictional AgentLibrary department personas | Stable registry identities, owning maintainers, releases and contract references |
+| Agent reuse | Browser-local request/approve/deny, contract fixture and project creation | Real invocation grants with action/resource/field/expiry/revocation scope |
+| Execution | Scripted browser build/test/tool/deploy outcomes and isolated HTML preview | Runtime adapters, protected execution and customer-owned credentials |
+| Activity and Studio | Project messages and in-app same-agent editing simulation | Shared comments/presence, separate runtime audit and validated external Studio/OpenController adapters |
 
-The next architectural proof after the permitted UI simulation is one shared project with two real users, different roles, a deliberately conflicting edit and a rejected unauthorized write. Runtime agent reuse is a separate proof. Neither is required to pretend this assignment prototype is a production platform.
+The next proof is deployment of the reviewed source followed by real-account role, revocation and conflict checks. Runtime agent reuse remains a separate proposed system; it is not made real by the new department project table.

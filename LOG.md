@@ -30,7 +30,7 @@
 - Verified Reviewer knowledge reference and individual fixture, `release_reviews` collection metadata, generated-app Email/Google settings and custom HTTP-tool source definition after reload. The tool used only `PAYMENT_API_KEY` as a variable name; its review explicitly said NOT SENT.
 - Verified a real blank-entry-point edit produced a 3/4 source-check failure, the fix action opened the editor, and manually restoring the exact HTML followed by rerunning produced 4/4.
 - Verified the disconnected demo build at 127.0.0.1:5180: disabled Google button/setup notice and prompt-to-preview flow; no application console errors, with an extension warning kept separate.
-- Final added-modal mobile validation remained unverified because the viewport override did not reach mobile width; it was reset. Earlier 390-pixel results apply only to the earlier core workspace. Download arrival remains unconfirmed and the upload picker remains permission-blocked. Real Google/cloud browser verification and public release remain pending. Full evidence is in `evals/2026-10-05-parity-verification.md`.
+- Final added-modal mobile validation remained unverified because the viewport override did not reach mobile width; it was reset. Earlier 390-pixel results apply only to the earlier core workspace. Download arrival was unconfirmed at that browser check; the later supplied Markdown brief resolves that specific artifact only, as recorded below. The upload picker remains permission-blocked. Real Google/cloud browser verification and public release remain pending. Full evidence is in `evals/2026-10-05-parity-verification.md`.
 
 ### Release checkpoint preparation
 
@@ -39,3 +39,17 @@
 - Converted cross-project documentation links into explicit historical-provenance labels so the release documents do not depend on unrelated local folders.
 - Frontend build/typecheck and all 19 tests passed after the additions. Rebuilt the disconnected demo without backend URLs; no deployment hostname appeared in its 15 output files and local environment configuration was unchanged.
 - Google readiness remains false. Real OAuth/cloud browser checks and public repository/hosting release await user setup/approval; no public deployment or hiring submission occurred.
+
+### Supplied Markdown download verified
+
+- The user supplied `payment-status-workflow-brief.md` from Downloads and requested it be saved. The original was preserved; the saved copy is [docs/ref-payment-status-workflow-brief.md](docs/ref-payment-status-workflow-brief.md).
+- Independently read the brief and verified both files are 1,569 bytes with SHA-256 `3220af33a43e34e2647593636604173a13bc770d6980e0f1f9dd1c15128b47a4`. This confirms arrival of this Markdown brief only; ZIP export and other downloads remain unverified.
+- The content is an earlier project-derived LangGraph sample snapshot: draft, six source files, no saved plan, and simulated Payment status reuse pinned to version 1.2. It is not the current workspace state or proof of a connected runtime.
+- Preserved the earlier browser-event timeout and blocked `chrome://downloads/` attempt as historical, inconclusive checks. Updated README, parity verification and requirement audit with the supplied-file evidence. No source code, tests, builds, browser operations or commits were performed for this update.
+
+### Real department accounts prepared locally
+
+- User deferred Google OAuth and chose real login ID/password accounts with shared app data across browsers/devices. No blueprint was restarted.
+- Implemented server-owned department membership, same-project Viewer/Editor grants, revocation, expected-revision conflicts and a lightweight project catalog with bounded legacy backfill. Existing projects remain private by default.
+- Added account and department screens, real Shared with me filtering, viewer guards and draft recovery. Separate agent-library and runtime/build/integration/deployment scenarios remain simulated.
+- Prepared code and migration for the dedicated development deployment; no new schema, backend code, credentials, public repository or production deployment has been applied in this step. See evals/2026-10-05-department-multiplayer.md for checks.

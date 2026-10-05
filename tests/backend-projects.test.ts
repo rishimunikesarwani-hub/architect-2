@@ -17,7 +17,7 @@ async function user(t: ReturnType<typeof setup>, name: string, expired = false) 
   // Deployed auth functions have no fixture or testing path.
   const now = Date.now();
   const account = await t.mutation(components.betterAuth.adapter.create, {
-    input: { model: 'user', data: { name, email: `${name}@example.invalid`, emailVerified: true, createdAt: now, updatedAt: now } },
+    input: { model: 'user', data: { name, username: name.toLowerCase(), email: `${name}@example.invalid`, emailVerified: true, createdAt: now, updatedAt: now } },
   });
   const session = await t.mutation(components.betterAuth.adapter.create, {
     input: { model: 'session', data: {
@@ -43,7 +43,7 @@ describe('project ownership and persistence', () => {
     const alice = await user(t, 'Alice');
     const state = { source: 'prompt', color: 'orange', state: { messages: [{ role: 'user', text: 'Build it' }], files: [{ path: 'main.py', content: 'print(1)' }], agents: [{ name: 'Researcher' }], connections: ['Knowledge base'], deployment: { status: 'simulated' } } };
     const id = await alice.client.mutation(api.projects.create, { ...sample, stateJson: JSON.stringify(state) });
-    await alice.client.mutation(api.projects.update, { id, title: 'Updated agent', stage: 'ready' });
+    await alice.client.mutation(api.projects.update, { id, expectedRevision: 0, title: 'Updated agent', stage: 'ready' });
     const project = await alice.client.query(api.projects.get, { id });
     expect(project.ownerId).toBe(alice.id);
     expect(project.title).toBe('Updated agent');
@@ -59,7 +59,7 @@ describe('project ownership and persistence', () => {
     const id = await alice.client.mutation(api.projects.create, sample);
     expect(await bob.client.query(api.projects.list, {})).toEqual([]);
     await expect(bob.client.query(api.projects.get, { id })).rejects.toThrow('Project not found');
-    await expect(bob.client.mutation(api.projects.update, { id, title: 'Stolen' })).rejects.toThrow('Project not found');
+    await expect(bob.client.mutation(api.projects.update, { id, expectedRevision: 0, title: 'Stolen' })).rejects.toThrow('Project not found');
     await expect(bob.client.mutation(api.projects.archive, { id })).rejects.toThrow('Project not found');
     expect((await alice.client.query(api.projects.get, { id })).title).toBe(sample.title);
   });
@@ -69,7 +69,7 @@ describe('project ownership and persistence', () => {
     const alice = await user(t, 'Alice');
     const id = await alice.client.mutation(api.projects.create, sample);
     await expect(t.query(api.projects.get, { id })).rejects.toThrow('Unauthenticated');
-    await expect(t.mutation(api.projects.update, { id, title: 'Changed' })).rejects.toThrow('Unauthenticated');
+    await expect(t.mutation(api.projects.update, { id, expectedRevision: 0, title: 'Changed' })).rejects.toThrow('Unauthenticated');
     await expect(t.mutation(api.projects.archive, { id })).rejects.toThrow('Unauthenticated');
   });
 
