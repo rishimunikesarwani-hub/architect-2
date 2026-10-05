@@ -69,3 +69,10 @@
 - Browser Settings now reports password sign-in ready. Login and registration dialogs load without the old activation notice; sampled application error log is empty. Authenticated cross-browser UI acceptance remains pending, distinct from the successful live API checks.
 - Updated setup/evidence and architecture state labels. Public repository/frontend publication, production deployment and hiring-form submission remain unperformed. Google remains deferred.
 - After deployment code generation and diagram refresh, the frontend production build and independent backend TypeScript check both passed. The sanitized live smoke report is retained under evals alongside the verification narrative.
+
+### Mobile panel checks and public release preflight
+
+- At a measured391x844 viewport, checked Design system, Build artifacts, GitAgent files, Custom tools (including its unsent review), and Studio handoff in the disconnected local preview. Dialog geometry showed no horizontal overflow. Screenshot capture timed out; the record is DOM/layout evidence only.
+- Reproduced a 72-character knowledge-reference title overflowing its row (client207/scroll322), added wrapping, rebuilt, and verified client207/scroll207 with text inside the row. Canceled the temporary references and tool proposal; no saved project source changed. Added matching long-name protections for release titles and department grants; authenticated department-render verification remains pending.
+- Normal frontend and disconnected preview builds passed. Final browser error log was empty; restored viewport and preserved the live account setup tab. See evals/2026-10-05-mobile-panels.md.
+- Read-only GitHub/Vercel checks found the proposed repository/project absent and no remote configured. Reviewed tracked files/history for common credential patterns and recorded the exact hosting-origin change needed for publication approval. No remote or deployment was created. See evals/2026-10-05-release-preflight.md.

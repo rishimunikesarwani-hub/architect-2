@@ -20,6 +20,8 @@ Proposed new Vercel project: `architect-2`, deployed independently from the exis
 
 Verify both names are available before publishing; no remote repository or hosting project has yet been created by this handoff.
 
+The [2026-10-05 read-only preflight](../evals/2026-10-05-release-preflight.md) checked both names, the selected Vercel scope, tracked files/history and the current authentication origin. It found no existing repository/project with these names at inspection time. Recheck immediately before publication; the required origin switch is part of the approval scope.
+
 ## Authentication for a hosted app
 
 The current Convex development backend trusts `http://localhost:5177`. A hosted site's exact HTTPS origin must be deliberately configured as SITE_URL before offering live login there. The current code trusts one canonical origin; switching it to the hosted origin also requires updating the browser acceptance target. Do not copy credentials from another application or set the client secret in a Vite/browser environment variable.

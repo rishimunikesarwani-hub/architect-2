@@ -1,5 +1,7 @@
 # Extended feature verification - 2026-10-05
 
+> Later evidence: the approved password/department backend is deployed and passed [15 live API checks](2026-10-05-department-multiplayer.md). Google is deferred. The subsequent [mobile panel check](2026-10-05-mobile-panels.md) reached391x844 and verified five added panels, superseding the failed viewport attempt below for those panels only. Earlier results remain historical; authenticated browser acceptance and public release are still pending.
+
 This continues the earlier browser record after reading the complete hiring brief and adding source-product feature flows. Browser results below were observed and reported by the main agent in Chrome; the audit agent recorded them without repeating browser operations. The later supplied Markdown download was independently read and hash-checked on disk. These are local prototype checks, not proof of connected production services.
 
 | Flow | Observed browser evidence |
