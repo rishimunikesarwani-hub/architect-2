@@ -1,6 +1,6 @@
 # Architect 2.0 release handoff
 
-> Current scope update (2026-10-05): the user deferred Google OAuth and explicitly chose real login ID/password accounts with shared department app data. This supersedes the older Google-blocked and owner-only statements below. Local implementation and tests are in place; the additive development schema update and live two-session acceptance await approval. See [department verification](../evals/2026-10-05-department-multiplayer.md) and [current backend setup](guide-backend-setup.md). Historical browser evidence below stays historical.
+> Current scope update (2026-10-05): the user deferred Google OAuth and explicitly chose real login ID/password accounts with shared department app data. This supersedes the older Google-blocked and owner-only statements below. The approved development schema/functions are deployed; all 15 live authentication and department API checks passed across independent accounts. Authenticated cross-browser UI acceptance and public release remain pending. See [department verification](../evals/2026-10-05-department-multiplayer.md) and [current backend setup](guide-backend-setup.md). Historical browser evidence below stays historical.
 
 
 The complete hiring brief requests a live app URL, a GitHub repository, an architecture diagram and an accompanying Markdown explanation. Publishing and assignment submission are separate actions. The user requires approval before a production deployment; no submission is authorized.

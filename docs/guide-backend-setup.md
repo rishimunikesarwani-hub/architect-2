@@ -1,6 +1,6 @@
 # Login ID, departments and Convex setup
 
-The user deferred Google OAuth and explicitly chose real login ID/password accounts sharing one app across departments. The new implementation is complete in local source. The dedicated development deployment still runs the earlier backend until the additive schema/code update is approved. This document does not claim live password authentication or cross-browser persistence has passed.
+The user deferred Google OAuth and explicitly chose real login ID/password accounts sharing one app across departments. The user-approved schema/functions update was deployed to `dev:perceptive-ermine-27` on 2026-10-05 at 22:44 IST. Normal signup/username sign-in and independent-client department API checks passed **15/15** against that live development backend. Authenticated browser and cross-browser UI acceptance remain pending; API evidence is not browser evidence.
 
 ## Development target
 
@@ -12,11 +12,11 @@ The user deferred Google OAuth and explicitly chose real login ID/password accou
 
 The existing BETTER_AUTH_SECRET and SITE_URL remain on this dedicated deployment. No additional Google credentials, Google project or payment setup is required for password sign-in. Never place a secret in VITE_* variables, source, chat, project files or Git.
 
-## Concrete database update awaiting approval
+## Development update applied
 
-Add workspaces, departments, workspaceMembers, projectGrants and projectCatalog tables. Add optional workspaceId, revision and catalogued fields plus indexes to existing projects. Existing project documents and owner identities are preserved; old projects remain private until their owner explicitly attaches them to a workspace.
+The additive update introduced workspaces, departments, workspaceMembers, projectGrants and projectCatalog tables, plus optional workspaceId, revision and catalogued fields and indexes on existing projects. Existing project documents and owner identities are preserved; old projects remain private until their owner explicitly attaches them to a workspace.
 
-Deploy local functions and schema to the named development deployment only. Then run the internal catalog:backfillLegacy operation in batches of at most five projects until it returns done:true. This adds metadata records for efficient project cards; it does not change source files, ownership or access. The migration is not scheduled automatically. Until complete, a bounded compatibility fallback shows at most five legacy projects per owner.
+The approved development command was `convex dev --once --typecheck enable`. The subsequent internal `catalog:backfillLegacy` operation completed with `done: true, migrated: 0`; no legacy records required migration. Backfill adds metadata records for efficient project cards without changing source files, ownership or access, and is not scheduled automatically. Future legacy backfills remain bounded to five projects per call.
 
 Local review commands:
 
@@ -26,14 +26,14 @@ npm run build
 npx tsc --project src/convex/tsconfig.json --noEmit
 ```
 
-Only after approval, verify the deployment selector names architect-2/perceptive-ermine-27 before using the existing Convex development workflow. Do not use convex deploy or a production deployment. Do not expose configuration secrets in verification output.
+Only the dedicated development target was updated. No `convex deploy`, production deployment, public frontend hosting, repository publication or hiring submission was performed. Preserve the named deployment selector and keep configuration secrets out of verification output.
 
-## Account and department flow after activation
+## Account and department flow
 
 1. Open Sign in > Create account. Each person chooses their own login ID and password, display name and email. Login IDs are 3-40 letters, numbers, dots or underscores, normalized to lowercase; passwords are 12-128 characters. Existing Google accounts are not silently linked to password accounts.
 2. The owner opens Settings > Manage departments, creates a workspace, then departments such as Support and Finance.
 3. Teammates create their own accounts. The owner assigns each exact existing login ID to one department in that workspace. There is no invitation email and users cannot choose their own privileged department.
-4. The owner opens an owned app > Share, attaches it to the workspace, and grants Viewer or Editor access to each department.
+4. The owner opens an owned app > Manage access, attaches it to the workspace, and grants Viewer or Editor access to each department.
 5. Teammates sign in from a separate browser or device and open My projects > Shared with me. The app has the same project ID and saved source for every authorized department; it is not cloned.
 6. Viewers inspect/export; editors save. Only the owner/admin changes grants. Revoking a membership or grant removes server access immediately on subsequent checks and reactive subscriptions.
 
@@ -56,9 +56,13 @@ Pending drafts are retained in memory under their originating account while this
 
 Permissions are stored outside editable stateJson. The state budget is 600KB UTF-8; credentials must never be included. Catalog metadata is synchronized atomically with project changes. Limits are 20 owned workspaces, 20 memberships per account, 100 departments/members/shared apps per workspace and 1,000 grants per workspace. These are prototype bounds, not production scalability evidence.
 
-## Acceptance still required after the update
+## Verified development checks and remaining UI acceptance
 
-Two independent authenticated browser sessions must open the same app ID, observe an editor save, deny a viewer edit through the API, reject a stale save, preserve its draft, retain data after reload/sign-out/in, and lose access after revocation. Verify an unrelated account sees no project. In-memory tests cover these backend policies and actual Better Auth signup/password endpoints; they do not prove a deployed browser round trip.
+The [live smoke report](../evals/2026-10-05-department-backend-smoke.json) records **15/15 passed checks** against the deployed development service. Four synthetic accounts used normal Better Auth signup and username sign-in, followed by independent Convex clients. Those clients verified the same app ID/source across departments, editor updates visible to owner/viewer, viewer write/grant denial, unrelated-account and anonymous isolation, stale-save rejection, immediate grant revocation, wrong-password rejection, and normal logout invalidating the prior JWT. Synthetic QA accounts, the workspace and the app were retained; no user data was deleted.
+
+Readiness is `password: true, google: false`. DOM checks in the local browser at http://localhost:5177 confirmed **Ready to sign in** for password authentication; account forms are no longer gated by a backend-update notice, and the sampled application error log was empty. Screenshot-service attempts timed out, so no screenshot proof is claimed. The account form was handed to the user for password entry. This is readiness/UI-entry proof, not a completed authenticated browser round trip.
+
+Still required: two independent authenticated browser sessions must create/sign in to accounts, open the same shared app, observe an editor save, exercise the Viewer interface, preserve/recover a conflicting draft, retain data after reload/sign-out/in, and lose access after revocation. Department-management UI and cross-browser persistence remain unverified against the updated service. The API checks above should not be relabeled as completed browser acceptance.
 
 ## Historical deployment evidence and optional Google
 

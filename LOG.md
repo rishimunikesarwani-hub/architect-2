@@ -60,3 +60,12 @@
 - Corrected stale Google-only and owner-only statements in the production architecture and its generated SVG/PNG. Existing department/auth/revision/catalog code is local and awaiting development activation; coding/runtime/registry services remain proposals. Primary-source research and sizing arithmetic were preserved.
 - Updated the release guide so a disconnected preview cannot be represented as satisfying real department sharing. Hosted acceptance requires the exact origin, password login and two-account shared-app checks.
 - Production build passed; generated diagram/Markdown public and release-bundle copies matched source SHA-256. No schema, deployment or publication action was taken. The pending schema approval was not inferred from the automatic goal continuation.
+
+### Approved development update and live backend acceptance
+
+- User explicitly approved **Apply the development update**. Verified the exact dedicated development selector and deployed the additive department schema/functions with `convex dev --once --typecheck enable --tail-logs disable`; functions ready at 22:44 IST on 2026-10-05.
+- Legacy metadata backfill returned done:true, migrated:0. Live readiness now reports password:true and google:false. Existing project ownership/source were not changed by the backfill.
+- Added a guarded development-only smoke script using normal Better Auth and authenticated Convex APIs. All 15 checks passed across four independent synthetic accounts, covering the same shared app, Editor propagation, Viewer denial, isolation, stale-write rejection, revocation, wrong-password rejection and logout/session invalidation. No auth bypass was introduced; credentials remained in process memory and all synthetic sessions were signed out. Labeled synthetic test records are retained.
+- Browser Settings now reports password sign-in ready. Login and registration dialogs load without the old activation notice; sampled application error log is empty. Authenticated cross-browser UI acceptance remains pending, distinct from the successful live API checks.
+- Updated setup/evidence and architecture state labels. Public repository/frontend publication, production deployment and hiring-form submission remain unperformed. Google remains deferred.
+- After deployment code generation and diagram refresh, the frontend production build and independent backend TypeScript check both passed. The sanitized live smoke report is retained under evals alongside the verification narrative.

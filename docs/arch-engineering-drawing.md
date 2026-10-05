@@ -1,6 +1,6 @@
 # Architect 2.0 engineering drawing
 
-Snapshot: 2026-10-05. This records the current local source and the previously discussed multiplayer direction. **Login ID/password, department permissions, metadata subscriptions and revision-conflict handling are implemented in local source; the new development schema/functions still await approval to deploy and live verification.** Google setup is deferred. This is not a new blueprint or a production-readiness claim; the assignment permits simulated feature flows.
+Snapshot: 2026-10-05. This records the prototype, its verified development backend and the previously discussed multiplayer direction. **The approved auth/department/catalog schema and functions were deployed to `dev:perceptive-ermine-27` on October 5 at 22:44 IST. All 15 live API smoke checks passed using normal Better Auth HTTP requests and independent Convex clients.** Authenticated cross-browser UI acceptance remains pending; Google setup is deferred. This is not a new blueprint or a production-readiness claim; the assignment permits simulated feature flows.
 
 ![Architect 2.0 engineering map](arch-engineering-drawing.svg)
 
@@ -10,12 +10,12 @@ Snapshot: 2026-10-05. This records the current local source and the previously d
 
 | Status | Meaning |
 |---|---|
-| Local source | Inspected implementation exists. New auth/team/catalog/schema changes are not claimed deployed or verified with live accounts. |
+| Source and development evidence | Frontend/source implementation exists; the approved development backend is deployed and has 15 passing live API checks. This does not establish authenticated cross-browser UI acceptance or production readiness. |
 | Deferred Google | Optional provider wiring remains; credentials and a Google round trip are not part of the completed verification. |
 | Simulated | A UI demonstration updates prototype state. No live model, GitHub write, external tool, email invitation or app deployment runs. |
 | Proposed | Agent registry, runtime invocation grants, protected execution, comments and simultaneous co-editing remain future work. |
 
-An older owner-only development backend was deployed earlier. That historical check does not establish that the newly written department or login-ID code is running there.
+The new development deployment replaces the earlier owner-only snapshot. `catalog.backfillLegacy` returned `done: true, migrated: 0`; readiness returned password true and Google false. The frontend at `http://localhost:5177` displayed the ready state, but its authenticated cross-browser journey has not yet been accepted. [Live backend smoke report](../evals/2026-10-05-department-backend-smoke.json).
 
 ## Current application architecture
 
@@ -40,7 +40,7 @@ flowchart LR
     Sim -->|prototype state only| State
   end
 
-  subgraph Backend["Backend local source - development deployment approval pending"]
+  subgraph Backend["Convex development backend - deployed; live API checks passed"]
     Auth["Better Auth + username plugin<br/>login ID / password, session identity<br/>cross-domain bridge + auth rate limits"]:::local
     Access["Server authorization<br/>owner or workspace administrator<br/>department grant: editor / viewer"]:::local
     Query["list: authorized metadata only<br/>watch: active authorized full project<br/>get: authorized explicit lookup"]:::local
@@ -75,7 +75,7 @@ The frontend keeps guest demo data separate from authenticated projects; it does
 
 The metadata catalog contains title, bounded description, framework, stage, revision and presentation/count fields, but no complete `stateJson`. `projects.list` returns authorized card metadata. `projects.watch` returns the active authorized full project or null when it is unavailable/unauthorized, so revocation need not throw through the render tree. `get` remains an explicit authorized full lookup. Full project documents contain source files, messages, settings, sample agents and checkpoints, with a 600 KB state limit. These are real access/persistence mechanisms in source, not agent-execution infrastructure. [Project functions](../src/convex/projects.ts), [catalog helpers](../src/convex/catalog.ts), [schema](../src/convex/schema.ts).
 
-Create/update/archive and workspace attachment synchronize `projectCatalog` with the full project in the same mutation. Legacy documents permit missing revision, interpreted as zero. The explicit internal `catalog.backfillLegacy` operation processes at most five legacy source documents per call; it is not auto-run at deployment. A bounded owner-only list fallback covers five legacy documents during transition. Deploying the schema and executing any backfill still require the applicable approval; this drawing does not claim either happened.
+Create/update/archive and workspace attachment synchronize `projectCatalog` with the full project in the same mutation. Legacy documents permit missing revision, interpreted as zero. The explicit internal `catalog.backfillLegacy` operation processes at most five legacy source documents per call; it is not auto-run at deployment. A bounded owner-only list fallback covers five legacy documents during transition. The approved development deployment completed; the explicitly run backfill reported `done: true, migrated: 0`, so no legacy documents were migrated in that run. This is not a production schema deployment.
 
 ### Saves, conflict handling and draft recovery
 
@@ -83,7 +83,7 @@ The backend compares `expectedRevision` before modifying a project, rejects a mi
 
 `ProjectSaveQueue` serializes writes per project while allowing other projects to progress. Already-dirty same-client edits chain the revisions acknowledged by successful writes. A first clean draft uses its own supplied revision, so a newer subscription arriving before the UI applies its contents cannot authorize overwriting that unseen version. Subscriptions cannot advance a dirty/blocked baseline. Failure retains dirty status, drops scheduled older snapshots and blocks that project; retry keeps the previous baseline. `hold` restores an unsaved draft without writing. `acceptRemote` installs an explicitly accepted baseline after the caller preserves/discards its local copy; `reset` invalidates callbacks from the previous account. Neither method cancels a request already sent to the server. [Queue implementation](../src/lib/project-save-queue.ts), [11 focused queue tests](../tests/project-save-queue.test.ts).
 
-The app integrates explicit retry and preservation as a private copy. Account handoff, revocation and unsaved-editor guards are being integrated and require final browser checks; do not interpret the queue tests as proof of those complete UI journeys. In-memory recovery does not survive closing or reloading a tab. [App integration](../src/app.tsx), [source editor](../src/components/workspace.tsx).
+The app integrates explicit retry and preservation as a private copy. Account handoff, revocation and unsaved-editor guards still require authenticated browser acceptance; neither queue tests nor backend smoke checks prove those complete UI journeys. In-memory recovery does not survive closing or reloading a tab. [App integration](../src/app.tsx), [source editor](../src/components/workspace.tsx).
 
 **Technical:** A revision is the version number of the shared project document. An editor saves against the version they actually edited; if another user saved first, the server rejects the stale write and the draft needs recovery/review.
 
@@ -93,7 +93,9 @@ The app integrates explicit retry and preservation as a private copy. Account ha
 
 The iframe uses `sandbox="allow-scripts"` without `allow-same-origin`; supplied HTML is parsed before a restrictive CSP is inserted. This isolates host cookies/storage and restricts resource loading, network APIs and forms. It is not a server sandbox, framework runner or complete network-isolation boundary: a script may still navigate its own frame. React/Python/server processes are not executed. [Preview implementation](../src/components/workspace.tsx).
 
-Backend access/auth tests exercise local in-memory behavior. The focused queue suite passed 11 tests in this source-review pass. No deployment or live login/department session was performed for this drawing update. Required proof after approved deployment includes two real accounts, editor/viewer denial, revocation, same-project stale-save rejection and recovery, sign-out/session restore, and the metadata-to-full-project transition. These checks validate the implemented mechanism; they do not require deploying the proposed agent runtime. [Backend tests](../tests/backend-teams.test.ts), [auth tests](../tests/backend-auth.test.ts).
+Backend access/auth unit tests exercise local in-memory behavior; the focused queue suite previously passed 11 tests. Separate live evidence now records **15/15 smoke checks** against `dev:perceptive-ermine-27`: four synthetic accounts completed normal signup and login-ID sign-in; independent department clients read the same app ID/source; an editor's save propagated; viewer writes/grants and outsider/anonymous access were denied; stale revisions were rejected without overwriting source; revocation removed editor access; an incorrect password was rejected; normal logout invalidated the owner session even with its prior JWT; synthetic sessions were closed. The labeled QA accounts/workspace/app were retained. [Live smoke results](../evals/2026-10-05-department-backend-smoke.json), [backend tests](../tests/backend-teams.test.ts), [auth tests](../tests/backend-auth.test.ts).
+
+The smoke uses Better Auth HTTP and independent Convex clients, **not authenticated browser UI automation**. Cross-browser signup/sign-in, shared editing, viewer/revocation presentation, draft/conflict recovery, session reload and the metadata-to-full-project UI transition remain pending acceptance. `http://localhost:5177` readiness alone does not prove those journeys. No production infrastructure was deployed for these checks.
 
 ## Multiplayer direction inherited from prior work
 
@@ -108,7 +110,7 @@ flowchart LR
   classDef proposed fill:#f3f5f6,stroke:#879399,stroke-dasharray:6 4,color:#35434b
   classDef simulated fill:#f1edfb,stroke:#8a73b4,color:#493466
   classDef local fill:#edf6ef,stroke:#408157,color:#1c3926
-  Projects["LOCAL SOURCE<br/>department project roles<br/>server revision conflict checks"]:::local
+  Projects["DEV API VERIFIED<br/>department project roles<br/>server revision conflict checks"]:::local
   Library["SIMULATION<br/>fictional Support / Finance review<br/>no enforced invocation grant"]:::simulated
   Registry["PROPOSED agent registry<br/>department owner + immutable version<br/>structured input/output contract"]:::proposed
   Studio["PROPOSED Studio release adapter<br/>owner controls version changes"]:::proposed
@@ -139,15 +141,15 @@ flowchart LR
 
 ## Current versus future state
 
-| Boundary | Current local source | Still proposed or pending |
+| Boundary | Current implementation and evidence | Still proposed or pending |
 |---|---|---|
-| Authentication | Login ID/password via Better Auth, session identity and configured auth rate limits | Approved dev deployment and live account proof; Google deferred; email/reset delivery absent |
-| Project access | Owner/workspace-admin management; department editor/viewer grants and revocation checks | Live two-account enforcement proof |
-| Data loading | Lightweight authorized catalog; active authorized full-project watch; explicit legacy backfill code | Approved schema/backfill and final browser transition proof |
-| Editing | Expected-revision mutation checks; per-project client queue, hold/retry and recovery integration | Final UI recovery/revocation proof; conflict diff/merge, comments and simultaneous editing remain proposed |
+| Authentication | Deployed Better Auth login ID/password; four live account sign-ins, wrong-password denial and logout invalidation passed | Authenticated cross-browser/session-restore acceptance; Google deferred; email/reset delivery absent |
+| Project access | Live owner/editor/viewer/outsider checks, shared app identity, denied writes/grants and revocation passed | Authenticated browser presentation and cross-browser acceptance |
+| Data loading | Deployed lightweight catalog and authorized full-project watch; backfill completed with zero migrated documents | Final metadata-to-full-project browser transition proof |
+| Editing | Live editor propagation and stale-save rejection passed; client queue, hold/retry and recovery implemented | Final UI recovery/revocation proof; conflict diff/merge, comments and simultaneous editing remain proposed |
 | Agent ownership | Per-project sample agents; fictional AgentLibrary department personas | Stable registry identities, owning maintainers, releases and contract references |
 | Agent reuse | Browser-local request/approve/deny, contract fixture and project creation | Real invocation grants with action/resource/field/expiry/revocation scope |
 | Execution | Scripted browser build/test/tool/deploy outcomes and isolated HTML preview | Runtime adapters, protected execution and customer-owned credentials |
 | Activity and Studio | Project messages and in-app same-agent editing simulation | Shared comments/presence, separate runtime audit and validated external Studio/OpenController adapters |
 
-The next proof is deployment of the reviewed source followed by real-account role, revocation and conflict checks. Runtime agent reuse remains a separate proposed system; it is not made real by the new department project table.
+The next proof is authenticated cross-browser UI acceptance using the deployed development backend. Runtime agent reuse remains a separate proposed system; it is not made real by department project grants or the passing backend smoke.

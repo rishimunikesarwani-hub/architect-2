@@ -8,7 +8,7 @@ Date: 2026-10-05. Scope: real login ID/password accounts and the same app shared
 - Save queue tests cover revision chaining, independent projects, stale clean drafts, remote updates during pending saves, blocked writes, explicit retry, held draft restoration and account-reset isolation.
 - Shared-state parser tests reject malformed and partial state before rendering, preserving the original JSON for download. Card reconciliation tests preserve full source at matching revisions, invalidate stale clean source, apply permission changes and remove revoked apps.
 - Frontend production build and independent backend TypeScript checks passed. No dependency or credential changes were required.
-- Architecture Markdown/SVG/PNG updated and rendered. New source remains explicitly distinguished from the older deployed backend and from proposed agent-runtime/registry capabilities.
+- Architecture Markdown/SVG/PNG distinguish the deployed department backend from proposed agent-runtime/registry capabilities.
 
 ## Browser checks before activation
 
@@ -17,12 +17,41 @@ Date: 2026-10-05. Scope: real login ID/password accounts and the same app shared
 - Opened the existing Payment status workflow - review demo. Typed a temporary source comment, tried Home, observed the save/discard navigation guard, then discarded the draft and verified source exactly matched its pre-test value. No source change was saved by this check.
 - Final sampled application error log was empty. Existing browser-local project data remained available.
 
-## Activation awaiting approval
+## Approved development activation
 
-Prepared additive schema: workspaces, departments, workspaceMembers, projectGrants, projectCatalog; optional project workspaceId/revision/catalogued fields and indexes. Target: architect-2 development deployment perceptive-ermine-27. Apply the schema/functions, then run internal catalog:backfillLegacy in five-project batches until done. This preserves existing project source and owner identity; it does not grant department access automatically.
+The user explicitly approved **Apply the development update**. Verified the local deployment selector was `dev:perceptive-ermine-27`, then ran `npx convex dev --once --typecheck enable --tail-logs disable`. Convex reported functions ready at 22:44 IST on 2026-10-05. The deployed additive schema includes workspaces, departments, workspaceMembers, projectGrants and projectCatalog, plus optional project workspaceId/revision/catalogued fields and indexes.
 
-No updated schema/functions, real account signup, live membership/grant, public hosting/repository publication or production deployment was performed in this step. In-memory test credentials are synthetic and never become deployed auth bypasses.
+`npx convex run catalog:backfillLegacy` returned `{"done":true,"migrated":0}`. No legacy project needed migration. `auth:readiness` returned `{"google":false,"password":true}`. No production deployment, public repository, public frontend or hiring submission was performed.
 
-## Live acceptance still pending
+After deployment-generated types and architecture updates, `npm run build` and `npx tsc --project src/convex/tsconfig.json --noEmit` passed again. Application behavior had not changed since the 88-test source suite above; that suite was not repeated for evidence/diagram changes.
 
-Two independent sessions must exercise account creation/login, the same shared project ID, cross-session update visibility, reload persistence, viewer denial, stale-write rejection/recovery, unrelated-account isolation and revocation. Backend tests are not substituted for this browser proof. Department-management screens are compile/static-reviewed but not yet verified against the activated live backend. Email verification, password-reset delivery, MFA and true simultaneous text co-editing remain outside this implementation.
+## Live backend acceptance: 15 checks passed
+
+Executed [the live smoke script](../ops/smoke-department-backend.mjs) with `--run` against the fixed development endpoints. It used normal Better Auth signup, username signin, session and Convex-token routes, followed by authenticated public project/team APIs. No authentication bypass or deployed test endpoint was added. Four synthetic accounts used independent Convex clients; passwords, session tokens and JWTs remained in process memory and were not logged or saved.
+
+The sanitized report is [saved with the verification evidence](2026-10-05-department-backend-smoke.json). Run ID: `muvikqtl_f47cfc`; shared project: `j57ak7j7cq10bs0cz0yqz5ngy58fqfts`; workspace: `js75zfyqpcv21km3hzrrq955cx8fpe9c`.
+
+Verified all 15 reported checks:
+
+- Anonymous identity and password readiness.
+- Four real account signups and login-ID/password signins, including login-ID normalization.
+- Workspace, Engineering/Finance departments, account membership and one shared app with Editor/Viewer grants.
+- Both department clients read the same project ID and source; listing omits full source.
+- Viewer writes and permission changes are rejected by the server.
+- Editor saves are visible to independent owner and viewer clients.
+- A stale revision is rejected without overwriting newer source.
+- Unassigned and anonymous clients cannot read the app.
+- Revoking the editor grant removes that existing client's reads, list entry and write access.
+- Incorrect password is rejected.
+- Logout invalidates the owner session and project access even with its previous JWT.
+- All remaining synthetic signup/signin sessions are signed out.
+
+The four clearly labeled synthetic accounts, workspace and app are retained. No app data was deleted. This proves deployed authentication and API behavior across independent sessions; it does not establish a completed browser journey.
+
+## Browser checks after activation and remaining acceptance
+
+At `http://localhost:5177`, Settings now displays **Login ID & password / Ready to sign in**. The sign-in and account-creation dialogs render without the earlier backend-update notice; empty-form submission remains disabled as expected. The sampled error log is empty. The account-creation screen is open for the user to choose and submit their own password, as required by browser-control credential rules.
+
+These post-activation checks used the rendered DOM. Both viewport and cropped screenshot requests timed out in the browser screenshot service, so no new screenshot artifact is claimed.
+
+Authenticated browser acceptance still needs two independent browser sessions opening the same app, observing an editor save, preserving a conflicting draft, retaining data after reload/sign-out/in and reflecting revoked access. Department-management screens are compile/static-reviewed but not yet verified through a completed authenticated browser flow. Email verification, password-reset delivery, MFA and true simultaneous text co-editing remain outside this implementation.
