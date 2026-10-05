@@ -1,0 +1,8 @@
+.git
+.env*
+.convex
+node_modules
+runs
+tests
+evals
+data
