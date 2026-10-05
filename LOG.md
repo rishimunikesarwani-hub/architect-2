@@ -53,3 +53,10 @@
 - Implemented server-owned department membership, same-project Viewer/Editor grants, revocation, expected-revision conflicts and a lightweight project catalog with bounded legacy backfill. Existing projects remain private by default.
 - Added account and department screens, real Shared with me filtering, viewer guards and draft recovery. Separate agent-library and runtime/build/integration/deployment scenarios remain simulated.
 - Prepared code and migration for the dedicated development deployment; no new schema, backend code, credentials, public repository or production deployment has been applied in this step. See evals/2026-10-05-department-multiplayer.md for checks.
+
+### Release and architecture consistency check
+
+- Re-read the full hiring specification in Chrome. It still requests the sandbox, agent harness, model switching, communication/preview, proxies, GitHub, both deployment paths, scaling, diagram/Markdown, and live URL/repository.
+- Corrected stale Google-only and owner-only statements in the production architecture and its generated SVG/PNG. Existing department/auth/revision/catalog code is local and awaiting development activation; coding/runtime/registry services remain proposals. Primary-source research and sizing arithmetic were preserved.
+- Updated the release guide so a disconnected preview cannot be represented as satisfying real department sharing. Hosted acceptance requires the exact origin, password login and two-account shared-app checks.
+- Production build passed; generated diagram/Markdown public and release-bundle copies matched source SHA-256. No schema, deployment or publication action was taken. The pending schema approval was not inferred from the automatic goal continuation.

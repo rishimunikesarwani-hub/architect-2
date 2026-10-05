@@ -1,6 +1,6 @@
 # Architect 2.0: proposed production architecture
 
-Decision date: 2026-10-05. **This is a researched engineering proposal, not deployed infrastructure.** It extends the actual React/Vite, Convex and Better Auth prototype without claiming that its simulated builds, integrations, sharing or releases execute in production. The [current implementation drawing](arch-engineering-drawing.md) remains the authoritative map of what exists today. The user explicitly skipped the blueprint interview; this document answers the assignment's architecture deliverable.
+Decision date: 2026-10-05. **This is a researched engineering proposal, not deployed infrastructure.** It extends the actual React/Vite, Convex and Better Auth prototype without claiming that its simulated builds, integrations, agent reuse or releases execute in production. The user chose login ID/password and deferred Google. Department project permissions, server revision checks and a lightweight project catalog are implemented in local source; their development schema/function deployment still awaits approval and live verification. The [current implementation drawing](arch-engineering-drawing.md) remains the authoritative map of that boundary. The user explicitly skipped the blueprint interview; this document answers the assignment's architecture deliverable.
 
 ![Proposed production engineering drawing](arch-production-architecture.svg)
 
@@ -19,7 +19,7 @@ Use **Convex for the trusted control plane**, **E2B for untrusted development ex
 | Responsibility | Proposed selection | Why this selection; tradeoff |
 |---|---|---|
 | Platform browser application | Existing React/Vite bundle on Vercel | Preserves the existing client and provides an independently deployable frontend. No server-side rendering migration is necessary for this workspace. Convex documents a Vercel deployment path. [Convex hosting guide](https://docs.convex.dev/production/hosting/vercel) |
-| Identity and control data | Existing Convex + Better Auth/Google, separate production deployment | Retains working owner-scoped project APIs; add memberships, revision checks, jobs and grants as explicitly new schema. Reactive state suits progress and collaboration. Long build execution stays outside database transactions. [Convex limits](https://docs.convex.dev/production/state/limits) |
+| Identity and control data | Existing Convex + Better Auth login ID/password; optional Google deferred; separate production deployment | Extend the local workspace/department permissions, project grants, revision checks and metadata catalog with durable jobs, immutable source revisions and runtime invocation grants. The new local schema/functions await development deployment approval and live checks. Reactive state suits progress and collaboration; long builds stay outside database transactions. [Convex limits](https://docs.convex.dev/production/state/limits) |
 | Durable work admission | Convex job/outbox records, Amazon SQS standard queues and dead-letter queues | Store accepted intent before dispatch; absorb bursts without starting every sandbox immediately. SQS can deliver a message more than once, so lease/checkpoint/idempotency are application responsibilities. [SQS delivery model](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues-at-least-once-delivery.html) |
 | Agent harness and release workers | TypeScript services on ECS Fargate | Long-lived workers can keep SDK/stream connections, heartbeat and resume jobs; AWS manages their hosts. Trusted worker containers never execute a user's shell command locally. [Fargate execution model](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html) |
 | Editable build and preview execution | E2B managed isolated Linux VMs with versioned Node/Python templates | Supports file and command operations plus a development web server without building a VM fleet. Pause/resume controls idle cost. Vendor availability, runtime limits and contracted concurrency remain dependencies. [E2B lifecycle](https://docs.e2b.dev/sandbox), [persistence](https://docs.e2b.dev/sandbox/persistence) |
@@ -53,12 +53,12 @@ flowchart TB
     Frame[Separate-origin preview iframe<br/>never receives platform credentials]:::boundary
   end
   Front[Vercel platform frontend<br/>static assets and release URL]:::outside
-  Google[Google identity provider]:::outside
+  Google[Optional Google identity provider<br/>user deferred configuration]:::outside
 
   subgraph Control[TRUSTED CONTROL PLANE]
-    Auth[Better Auth on Convex<br/>sessions and Google callback]:::control
+    Auth[Better Auth on Convex<br/>login ID and password sessions<br/>optional Google callback]:::control
     API[Convex control API<br/>membership, revision, budget admission]:::control
-    Meta[(Convex metadata<br/>projects, jobs, grants, releases)]:::storage
+    Meta[(Convex metadata<br/>existing workspaces, departments, project grants<br/>extend with jobs, agent grants and releases)]:::storage
     Dispatch[Outbox dispatcher<br/>retry with stable job ID]:::control
     Registry[Shared agent registry<br/>department owner, version, contract]:::control
   end
@@ -98,7 +98,7 @@ flowchart TB
 
   Front --> UI
   UI --> Auth
-  Auth <--> Google
+  Auth <-. optional provider .-> Google
   UI --> API
   Auth --> API
   API <--> Meta
@@ -219,7 +219,7 @@ The builder's coding model is separate from a generated agent's runtime model an
 
 ## 4. Frontend, backend, sandbox and live preview
 
-The frontend sends edits/prompts through the control API. It subscribes to compact job events and project metadata through Convex. The worker, not the browser, controls the sandbox. File-save requests carry `expectedRevision`; an accepted save creates the next immutable source manifest. Concurrent saves get a conflict response with both revisions. The present prototype's local write queue does not implement this protocol.
+The frontend sends edits/prompts through the control API. It subscribes to compact job events and project metadata through Convex. The worker, not the browser, controls the sandbox. File-save requests carry `expectedRevision`; an accepted production save creates the next immutable source manifest. Concurrent saves get a conflict response with both revisions. The present local source already implements expected-revision rejection, successful revision chaining in the client queue, protected dirty drafts, and an authorized metadata catalog plus active full-project subscription. These changes await approved development deployment and live checks. Durable job events, immutable object-store manifests and sandbox control remain proposed extensions. [Project functions](../src/convex/projects.ts), [catalog](../src/convex/catalog.ts), [save queue](../src/lib/project-save-queue.ts), [card reconciliation](../src/lib/project-sync.ts).
 
 A preview ticket binds viewer, tenant, project, lease generation and allowed app port. The browser opens a per-project preview origin under a **different registrable domain** from the platform. The gateway exchanges a short-lived, single-use bootstrap ticket for an HttpOnly viewer session; the bootstrap URL is not forwarded to user code. If third-party cookie restrictions block embedding, use a deliberate top-level preview window/bootstrap fallback rather than weakening authorization.
 
@@ -335,7 +335,7 @@ sequenceDiagram
 
 The platform repository is different from every generated application repository. GitHub Actions checks the platform, builds its Vite frontend, deploys staging Convex functions/schema, and builds signed/pinned trusted worker images. Infrastructure definitions provision queues, buckets, roles, ALBs and ECS services in staging before production. CI uses short-lived workload federation where available; deployments do not obtain credentials from project files.
 
-After staging checks, a reviewed promotion deploys the Vercel frontend and matching Convex API, then rolls trusted services with compatible event/API versions. Expand schema first, deploy consumers, migrate deliberately, and remove old fields only later. Existing build jobs carry a harness/template version so an in-flight worker can finish or resume compatibly during rollout. Maintain distinct dev/staging/production Google OAuth callback URLs and origins; do not copy the development callback from the current setup guide into production without configuration.
+After staging checks, a reviewed promotion deploys the Vercel frontend and matching Convex API, then rolls trusted services with compatible event/API versions. Expand schema first, deploy consumers, migrate deliberately, and remove old fields only later. Existing build jobs carry a harness/template version so an in-flight worker can finish or resume compatibly during rollout. Login ID/password is the chosen authentication flow; isolate each environment's Better Auth configuration, trusted origins and session secrets. If Google is enabled later, configure distinct dev/staging/production OAuth callbacks and origins rather than copying a development callback into production. Google remains deferred, not a prerequisite for verifying password sign-in.
 
 For this assignment, the concrete shipping target is much smaller: publish the existing prototype frontend with its configured backend, preserve truthful simulation labels, and expose the architecture artifacts and source repository. The proposed AWS/E2B runtime is not required to exist merely to host that prototype. Prepare the repository and reviewed release package first, then obtain approval for public deployment/publishing as required by `AGENTS.md`. Verify the live URL and repository after release; submission to the hiring form is a separate action and remains unperformed.
 
@@ -383,20 +383,20 @@ A single-region pilot is honest. Multi-AZ trusted services and vendor-managed re
 
 ## 10. Ownership, shared agent reuse and multiplayer
 
-The inherited product decision is departmental ownership with permissioned reuse in a shared Architect–Studio workspace, using Support and Finance as the example. Prior confirmed direction (historical local source: `Research_Data/multiplayer-agent-deck/deck-brief.md`; outside this repository). The earlier architecture calls server drafts/conflict handling proposed and defers character-level co-editing. Prior architecture, shared-workspace and permission sections (historical local source: `architecture.md`; outside this repository). Neither source is evidence that the current app has server-side sharing.
+The inherited product decision is departmental ownership with permissioned reuse in a shared Architect–Studio workspace, using Support and Finance as the example. Prior confirmed direction (historical local source: `Research_Data/multiplayer-agent-deck/deck-brief.md`; outside this repository). The earlier architecture calls server drafts/conflict handling proposed and defers character-level co-editing. Prior architecture, shared-workspace and permission sections (historical local source: `architecture.md`; outside this repository). Those historical sources are not deployment evidence. The current local code now implements department project access and expected-revision checks, while development deployment approval and live multi-account verification remain pending. The proposed shared agent registry and runtime permissions are separate.
 
-Proposed metadata adds `organizations`, `departments`, `projectMembers`, `projectRevisions`, `agentVersions`, `invocationGrants`, `jobs`, `events` and `releases`. Agent versions are immutable releases with input/output schemas, allowed tools and department owner. Project membership, agent edit rights, release rights and invocation rights are separate checks. Studio and Architect can become two clients of the same registry only after a supported identity/API integration is validated; the current in-app handoff is a simulation.
+Production metadata extends the existing local `workspaces`, `departments`, `workspaceMembers`, `projectGrants`, `projects` and `projectCatalog` schema; it does not rebuild all membership as a new service. Add `projectRevisions`, `agentVersions`, `invocationGrants`, `jobs`, `events` and `releases` for immutable execution history and runtime capabilities. Local department grants authorize project reads/edits; management remains with the project owner or workspace administrator. None of those roles authorizes agent invocation. Agent versions are immutable releases with input/output schemas, allowed tools and department owner. Project membership, agent edit rights, release rights and invocation rights remain separate checks. Studio and Architect can become two clients of the same registry only after a supported identity/API integration is validated; the current in-app handoff is a simulation. [Existing schema](../src/convex/schema.ts), [server authorization](../src/convex/access.ts), [department operations](../src/convex/teams.ts).
 
 Support requests Finance's `invoice.status.read` capability for an approved customer/case scope. Finance approves a pinned version and explicit fields/expiry. At runtime the invocation gateway validates trusted caller identity, tenant, current grant, version and input schema. The Finance agent's tool call is checked again at the billing API boundary; only allowed fields return. Editing prompts, selecting the fictional Finance role in the UI, or being in the same project cannot create that grant. Revocation applies to subsequent protected calls and cancels relevant long-lived sessions/jobs where possible; it cannot undo an external action already completed.
 
-For editing, use expected-revision compare-and-save, comments and a conflict diff before attempting character-level co-editing. Reuse is a versioned reference, not a copy of another team's credentials or private memory. Upgrading a reused agent shows contract changes and requires renewed compatibility/review where needed. The current AgentLibrary copies a described contract into a new owner's project; that is useful UX evidence, not this runtime system.
+For editing, retain the expected-revision compare-and-save already implemented in local source, and add comments and a conflict diff before attempting character-level co-editing. Reuse is a versioned reference, not a copy of another team's credentials or private memory. Upgrading a reused agent shows contract changes and requires renewed compatibility/review where needed. The current AgentLibrary copies a described contract into a new owner's project; its browser personas and approvals remain fictional and separate from real project permission code. It is useful UX evidence, not this runtime system.
 
 ## 11. What is implemented and what would prove the proposal
 
 | State | Evidence boundary |
 |---|---|
-| Implemented locally/development | React workspace; local demo persistence; owner-only Convex project API and tests; Better Auth integration code; source/ZIP parser; isolated HTML preview; labeled feature simulations; engineering artifacts |
-| Credential/integration pending | Real Google round trip and the signed-in browser create/edit/reload/sign-out journey; no claim that readiness flags prove these |
+| Implemented in local source | React workspace; local demo persistence; Better Auth login ID/password; owner/workspace-admin and department editor/viewer project permissions; expected-revision saves and dirty-draft queue; metadata catalog with authorized full-project watch; source/ZIP parser; isolated HTML preview; labeled feature simulations; engineering artifacts |
+| Development approval and verification pending | New auth/department/catalog schema and functions await approval to deploy. Then verify login ID/password, signed-in create/edit/reload/sign-out, two-account role enforcement, revocation and conflict recovery. An older owner-only development deployment and readiness flags do not prove these changes. Google is user-deferred and optional. |
 | Simulated UX | Prompt generation, external integrations, shared-agent grants, GitHub, Studio, model execution and generated-app deployment |
 | Proposed here | E2B, AWS infrastructure, model/tool/preview gateways, durable harness, real shared registry and app runtime, production deployment pipelines and scaling policies |
 | Unproven until measured | Sandbox isolation tests, reconnect/recovery, token/permission revocation, GitHub duplicate delivery handling, release rollback, representative framework runs, the capacity and latency targets above |

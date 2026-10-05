@@ -13,12 +13,12 @@ function edge(d,label,x,y,color='#6b8475',dash=false){add(`<path d="${d}" fill="
 add(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title desc"><title id="title">Architect 2.0 proposed production engineering drawing</title><desc id="desc">Prompt-to-preview path through Vercel, Convex authentication, admission, SQS, ECS coding workers, model and tool gateways, E2B sandboxes, S3 and an authenticated preview proxy. Separate GitHub and deployment pipelines publish apps. Cross-team Finance agent use has separate invocation and tool gates. All production execution services are proposals, not deployed prototype capabilities.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#6b8475"/></marker></defs><style>text{font-family:Inter,Segoe UI,Arial,sans-serif}path{stroke-linejoin:round;stroke-linecap:round}</style><rect width="2500" height="2420" fill="#fafbf8"/>`);
 text(50,59,'ARCHITECT 2.0 / PROPOSED PRODUCTION ARCHITECTURE',17,'#73897b',700);
 text(50,108,'From a prompt to a running application.',44,'#223a2a',650);
-text(50,145,'Current build: React prototype + Convex development backend. Production execution, multiplayer and release services below are proposed.',20);
+text(50,145,'Local source: login ID/password, department access, revisions and catalog. Dev deployment approval pending; runtime services remain proposed.',20);
 
 section(178,875,'01','BUILD AN APP · CONTROL PLANE + ISOLATED EXECUTION','The coding assistant runs outside untrusted app code. Checkpoints, scoped tools and bounded retries turn failures into recoverable steps.');
 const xs=[65,552,1039,1526,2013],w=420;
 node(xs[0],290,w,181,'React workspace',['Vercel static delivery','Guided / Developer · same files','Prompt, diff, terminal, preview'],'control','Browser');
-node(xs[1],290,w,181,'Convex + Better Auth',['Google OAuth / validated session','Tenant + project roles + revisions','Jobs, grants, release metadata'],'control','Identity & project API');
+node(xs[1],290,w,181,'Convex + Better Auth',['Login ID/password; Google optional','Department roles + revision checks','Catalog; proposed jobs + releases'],'control','Identity & project API');
 node(xs[2],290,w,181,'Admission + outbox',['Authorize action; reserve budget','Idempotent job + source version','Fair dispatch; limits per tenant'],'policy','Convex → dispatcher');
 node(xs[3],290,w,181,'SQS + dead-letter queue',['Durable work notification','Lease / heartbeat; bounded retry','Duplicate delivery handled'],'compute','Separate queues per workload');
 node(xs[4],290,w,181,'Coding harness workers',['ECS Fargate · TypeScript','Plan → patch → test → checkpoint','Stop, resume, cancel, ask review'],'compute','Trusted worker');
@@ -58,7 +58,7 @@ node(xs[2],1610,w,183,'Finance-owned agent',['Released immutable contract','Depa
 node(xs[3],1610,w,183,'Protected tool gate',['Recheck access on every tool call','Read-only invoice-status action','Field filtering + scoped secret'],'policy','No inherited refund permission');
 node(xs[4],1610,w,183,'Customer billing API',['Customer-owned source of truth','No shared credential in prompts','Return status / due date only'],'ops','External system');
 for(let i=0;i<4;i++)edge(`M${xs[i]+w} 1700H${xs[i+1]}`);
-text(73,1837,'Membership, agent registry and grants live in the control plane (01). Redacted decisions are auditable; do not expose hidden model reasoning.',18);
+text(73,1837,'Extend existing department project permissions with the proposed agent registry and invocation grants. Redacted runtime decisions are auditable.',18);
 
 section(1905,363,'04','OPERATE THE PLATFORM · SCALE WITH BOUNDS','These are design decisions and capacity assumptions to test, not claims that this prototype is production-ready.');
 node(65,2014,743,196,'Platform release',['Vercel UI · Convex production deployment','ECS worker / gateway services behind ALB','Infrastructure as code + isolated environments','Canary checks, compatible migrations, rollback'],'control','Separate from generated apps');

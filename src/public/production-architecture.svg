@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2420" viewBox="0 0 2500 2420" role="img" aria-labelledby="title desc"><title id="title">Architect 2.0 proposed production engineering drawing</title><desc id="desc">Prompt-to-preview path through Vercel, Convex authentication, admission, SQS, ECS coding workers, model and tool gateways, E2B sandboxes, S3 and an authenticated preview proxy. Separate GitHub and deployment pipelines publish apps. Cross-team Finance agent use has separate invocation and tool gates. All production execution services are proposals, not deployed prototype capabilities.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#6b8475"/></marker></defs><style>text{font-family:Inter,Segoe UI,Arial,sans-serif}path{stroke-linejoin:round;stroke-linecap:round}</style><rect width="2500" height="2420" fill="#fafbf8"/>
 <text x="50" y="59" font-size="17" fill="#73897b" font-weight="700">ARCHITECT 2.0 / PROPOSED PRODUCTION ARCHITECTURE</text>
 <text x="50" y="108" font-size="44" fill="#223a2a" font-weight="650">From a prompt to a running application.</text>
-<text x="50" y="145" font-size="20" fill="#53675b" font-weight="400">Current build: React prototype + Convex development backend. Production execution, multiplayer and release services below are proposed.</text>
+<text x="50" y="145" font-size="20" fill="#53675b" font-weight="400">Local source: login ID/password, department access, revisions and catalog. Dev deployment approval pending; runtime services remain proposed.</text>
 <rect x="35" y="178" width="2430" height="875" rx="20" fill="#fff" stroke="#dce5dc"/>
 <text x="65" y="219" font-size="19" fill="#789180" font-weight="700">01</text>
 <text x="112" y="220" font-size="29" fill="#263d30" font-weight="650">BUILD AN APP · CONTROL PLANE + ISOLATED EXECUTION</text>
@@ -15,9 +15,9 @@
 <rect x="552" y="290" width="420" height="181" rx="13" fill="#eaf3ed" stroke="#567f67" stroke-width="1.5"/>
 <text x="572" y="317" font-size="12" fill="#567f67" font-weight="750">IDENTITY &amp; PROJECT API</text>
 <text x="572" y="351" font-size="24" fill="#233c2d" font-weight="650">Convex + Better Auth</text>
-<text x="572" y="384" font-size="18" fill="#53675b" font-weight="400">Google OAuth / validated session</text>
-<text x="572" y="413" font-size="18" fill="#53675b" font-weight="400">Tenant + project roles + revisions</text>
-<text x="572" y="442" font-size="18" fill="#53675b" font-weight="400">Jobs, grants, release metadata</text>
+<text x="572" y="384" font-size="18" fill="#53675b" font-weight="400">Login ID/password; Google optional</text>
+<text x="572" y="413" font-size="18" fill="#53675b" font-weight="400">Department roles + revision checks</text>
+<text x="572" y="442" font-size="18" fill="#53675b" font-weight="400">Catalog; proposed jobs + releases</text>
 <rect x="1039" y="290" width="420" height="181" rx="13" fill="#fff4df" stroke="#b68d42" stroke-width="1.5"/>
 <text x="1059" y="317" font-size="12" fill="#b68d42" font-weight="750">CONVEX → DISPATCHER</text>
 <text x="1059" y="351" font-size="24" fill="#233c2d" font-weight="650">Admission + outbox</text>
@@ -176,7 +176,7 @@
 <path d="M972 1700H1039" fill="none" stroke="#6b8475" stroke-width="2.1"  marker-end="url(#arrow)"/>
 <path d="M1459 1700H1526" fill="none" stroke="#6b8475" stroke-width="2.1"  marker-end="url(#arrow)"/>
 <path d="M1946 1700H2013" fill="none" stroke="#6b8475" stroke-width="2.1"  marker-end="url(#arrow)"/>
-<text x="73" y="1837" font-size="18" fill="#53675b" font-weight="400">Membership, agent registry and grants live in the control plane (01). Redacted decisions are auditable; do not expose hidden model reasoning.</text>
+<text x="73" y="1837" font-size="18" fill="#53675b" font-weight="400">Extend existing department project permissions with the proposed agent registry and invocation grants. Redacted runtime decisions are auditable.</text>
 <rect x="35" y="1905" width="2430" height="363" rx="20" fill="#fff" stroke="#dce5dc"/>
 <text x="65" y="1946" font-size="19" fill="#789180" font-weight="700">04</text>
 <text x="112" y="1947" font-size="29" fill="#263d30" font-weight="650">OPERATE THE PLATFORM · SCALE WITH BOUNDS</text>
