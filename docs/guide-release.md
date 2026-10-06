@@ -1,6 +1,6 @@
 # Architect 2.0 release handoff
 
-The user approved public publication on 2026-10-06. The Architect prototype and repository are now live; authenticated hosted-browser acceptance remains pending. Google OAuth is deferred in favor of real login ID/password accounts and shared department app data. Publishing and hiring-form submission are separate actions; no hiring submission is authorized or performed.
+The user approved public publication on 2026-10-06. The Architect prototype and repository are live. The recorded hosted Chrome/Edge department acceptance matrix passed; source/ZIP file-picker acceptance remains permission-blocked. Google OAuth is deferred in favor of real login ID/password accounts and shared department app data. Publishing and hiring-form submission are separate actions; no hiring submission is authorized or performed.
 
 ## Initial published release
 
@@ -19,10 +19,12 @@ Only the public `VITE_CONVEX_URL` and `VITE_CONVEX_SITE_URL` belong in the front
 
 Generated-app builds, model calls, GitHub operations, tool connections and generated-app deployment remain labeled simulations. Publishing Architect itself does not make those services real. The signed-out browser-local demo is useful for reviewing those flows, but does not substitute for the requested real shared department data.
 
-## Remaining acceptance
+## Hosted acceptance and remaining limits
 
-1. Complete hosted login ID/password sign-up/sign-in and session restoration. The main agent rendered the homepage and account forms, then handed the create-account form to the user for password entry. No authenticated hosted-browser result is claimed.
-2. Verify shared-app behavior in independent browser sessions at the canonical origin: same app ID, editor propagation, Viewer denial, stale-conflict preservation and revocation. The [15 live backend checks](../evals/2026-10-05-department-multiplayer.md) remain API evidence, not this UI acceptance.
-3. Complete the source/ZIP file-picker journey when Chrome's file-URL permission allows it. The safe `data/import-demo.zip` retry on local port 5180 was still permission-blocked. Parser tests passed previously; this does not prove the browser import flow.
+The [hosted department acceptance record](../evals/2026-10-06-hosted-department-acceptance.md) now verifies separate Chrome owner and Edge test-member sessions: same app/source, saved edits propagating without reload, exact-source persistence after reload, stale-draft preservation and explicit recovery, reactive Viewer controls, revoked access, grant restoration, owner session restoration and test-member sign-out/reload/sign-in. These are observed UI results alongside the earlier [15 live backend checks](../evals/2026-10-05-department-multiplayer.md).
+
+Account creation was user-performed, not independently observed. The conflict-draft download event timed out and a bounded Downloads lookup found no matching file; its arrival remains unverified. The user's existing CRM project was preserved; the acceptance changes affected a separate synthetic QA app/workspace.
+
+Complete the source/ZIP file-picker journey when Chrome's file-URL permission allows it. The safe `data/import-demo.zip` retry on local port 5180 was still permission-blocked. The user was asked to enable the permission; no successful import is recorded yet. Parser tests passed previously and do not prove the browser import flow.
 
 Other unobserved download formats and UI branches retain the limits in the [requirement audit](../evals/2026-10-05-requirement-audit.md). Report the exact live/repository links and these limits; stop before the separate hiring submission form.

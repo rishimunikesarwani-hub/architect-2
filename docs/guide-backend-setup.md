@@ -1,6 +1,6 @@
 # Login ID, departments and Convex setup
 
-The user deferred Google OAuth and explicitly chose real login ID/password accounts sharing one app across departments. The user-approved schema/functions update was deployed to `dev:perceptive-ermine-27` on 2026-10-05 at 22:44 IST. Normal signup/username sign-in and independent-client department API checks passed **15/15** against that live development backend. Authenticated browser and cross-browser UI acceptance remain pending; API evidence is not browser evidence.
+The user deferred Google OAuth and explicitly chose real login ID/password accounts sharing one app across departments. The user-approved schema/functions update was deployed to `dev:perceptive-ermine-27` on 2026-10-05 at 22:44 IST. Normal signup/username sign-in and independent-client department API checks passed **15/15** against that live development backend. On 2026-10-06, [hosted Chrome/Edge acceptance](../evals/2026-10-06-hosted-department-acceptance.md) verified independent owner/member sessions, shared source updates, reloads, Viewer restrictions, conflict recovery, revocation and normal sign-out/sign-in. Account creation was performed by the user; no password was captured.
 
 ## Development target
 
@@ -56,13 +56,15 @@ Pending drafts are retained in memory under their originating account while this
 
 Permissions are stored outside editable stateJson. The state budget is 600KB UTF-8; credentials must never be included. Catalog metadata is synchronized atomically with project changes. Limits are 20 owned workspaces, 20 memberships per account, 100 departments/members/shared apps per workspace and 1,000 grants per workspace. These are prototype bounds, not production scalability evidence.
 
-## Verified development checks and remaining UI acceptance
+## Verified development checks and hosted UI acceptance
 
 The [live smoke report](../evals/2026-10-05-department-backend-smoke.json) records **15/15 passed checks** against the deployed development service. Four synthetic accounts used normal Better Auth signup and username sign-in, followed by independent Convex clients. Those clients verified the same app ID/source across departments, editor updates visible to owner/viewer, viewer write/grant denial, unrelated-account and anonymous isolation, stale-save rejection, immediate grant revocation, wrong-password rejection, and normal logout invalidating the prior JWT. Synthetic QA accounts, the workspace and the app were retained; no user data was deleted.
 
 Readiness is `password: true, google: false`. DOM checks in the local browser at http://localhost:5177 confirmed **Ready to sign in** for password authentication; account forms are no longer gated by a backend-update notice, and the sampled application error log was empty. Screenshot-service attempts timed out, so no screenshot proof is claimed. The account form was handed to the user for password entry. This is readiness/UI-entry proof, not a completed authenticated browser round trip.
 
-Still required: two independent authenticated browser sessions must create/sign in to accounts, open the same shared app, observe an editor save, exercise the Viewer interface, preserve/recover a conflicting draft, retain data after reload/sign-out/in, and lose access after revocation. Department-management UI and cross-browser persistence remain unverified against the updated service. The API checks above should not be relabeled as completed browser acceptance.
+The subsequent hosted acceptance used an owner in Chrome and a separate member in Edge. A dedicated synthetic workspace/app verified department creation, assignment, Viewer/Editor grants, exact shared-source equality, reactive editor changes, persistence after reopening/reloading, source-conflict preservation and explicit recovery, live Viewer restrictions, revocation removing an open app, restored access, and logout/reload/sign-in. The owner's existing CRM project was not changed. Browser evidence is recorded separately from the API checks in [the hosted acceptance report](../evals/2026-10-06-hosted-department-acceptance.md).
+
+Source-file import remains blocked by the browser extension's file-URL permission. Draft-download arrival was not established. Those limitations do not undo the observed authentication and shared-data behavior, and are not claimed as passed.
 
 ## Historical deployment evidence and optional Google
 

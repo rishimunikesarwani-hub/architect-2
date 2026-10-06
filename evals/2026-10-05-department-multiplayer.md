@@ -1,5 +1,7 @@
 # Department multiplayer verification
 
+> Subsequent hosted UI evidence (2026-10-06): independent Chrome/Edge sessions passed the shared-app, persistence, permissions, conflict-recovery, revocation and logout/sign-in checks. See [hosted department acceptance](2026-10-06-hosted-department-acceptance.md). The pending-browser statements below record the earlier October 5 activation checkpoint, not the current browser status.
+
 Date: 2026-10-05. Scope: real login ID/password accounts and the same app shared through department permissions. Google deferred by explicit user direction; blueprint remains skipped.
 
 ## Local implementation checks

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2420" viewBox="0 0 2500 2420" role="img" aria-labelledby="title desc"><title id="title">Architect 2.0 proposed production engineering drawing</title><desc id="desc">Prompt-to-preview path through Vercel, Convex authentication, admission, SQS, ECS coding workers, model and tool gateways, E2B sandboxes, S3 and an authenticated preview proxy. Separate GitHub and deployment pipelines publish apps. Cross-team Finance agent use has separate invocation and tool gates. All production execution services are proposals, not deployed prototype capabilities.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#6b8475"/></marker></defs><style>text{font-family:Inter,Segoe UI,Arial,sans-serif}path{stroke-linejoin:round;stroke-linecap:round}</style><rect width="2500" height="2420" fill="#fafbf8"/>
 <text x="50" y="59" font-size="17" fill="#73897b" font-weight="700">ARCHITECT 2.0 / PROPOSED PRODUCTION ARCHITECTURE</text>
 <text x="50" y="108" font-size="44" fill="#223a2a" font-weight="650">From a prompt to a running application.</text>
-<text x="50" y="145" font-size="20" fill="#53675b" font-weight="400">Dev backend: login ID/password, roles and revisions verified by 15 live API checks. Authenticated browser UI acceptance pending; runtime proposed.</text>
+<text x="50" y="145" font-size="20" fill="#53675b" font-weight="400">Prototype: 15 API checks + hosted Chrome/Edge sessions, shared edits, conflict discard and role/revocation checks passed. Runtime proposed.</text>
 <rect x="35" y="178" width="2430" height="875" rx="20" fill="#fff" stroke="#dce5dc"/>
 <text x="65" y="219" font-size="19" fill="#789180" font-weight="700">01</text>
 <text x="112" y="220" font-size="29" fill="#263d30" font-weight="650">BUILD AN APP · CONTROL PLANE + ISOLATED EXECUTION</text>
@@ -204,5 +204,5 @@
 <text x="1711" y="2195" font-size="18" fill="#53675b" font-weight="400">Redact prompts, credentials and sensitive tool data</text>
 <text x="52" y="2311" font-size="19" fill="#2f5940" font-weight="700">READ WITH: docs/arch-production-architecture.md</text>
 <text x="52" y="2348" font-size="18" fill="#53675b" font-weight="400">The companion document explains service choices, exact request paths, failure recovery, ownership boundaries, scaling arithmetic and primary sources.</text>
-<text x="52" y="2380" font-size="17" fill="#7c8e81" font-weight="400">Prototype implementation evidence is documented separately in arch-engineering-drawing.md. No production service shown here has been provisioned.</text>
+<text x="52" y="2380" font-size="17" fill="#7c8e81" font-weight="400">Prototype API/UI evidence is documented separately in arch-engineering-drawing.md. The proposed production execution services are not provisioned.</text>
 </svg>

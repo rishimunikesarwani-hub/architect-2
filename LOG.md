@@ -90,3 +90,11 @@
 - Changed SITE_URL on dev:perceptive-ermine-27 to the canonical HTTPS origin and read it back. Password readiness remains true; Google false. Hosted auth preflight returned204 with the exact allowed origin and required headers; anonymous session GET returned200/null.
 - Independently verified public app/assets and architecture artifacts over unauthenticated HTTP, with diagram/Markdown bytes matching the public repository. Browser home and account forms rendered. Saved published-home and account-handoff screenshots under runs.
 - Hosted account creation awaits user password entry/submission under browser-control credential rules. Authenticated shared-login UI acceptance remains pending. Retried the synthetic source-import fixture locally; Chrome still requires extension file-URL access. No hiring submission performed.
+
+### Hosted department browser acceptance
+
+- Observed the user's completed owner login and saved CRM project, then kept that project untouched. Created a clearly labeled synthetic QA app/workspace for verification and added the user-provided second test account to QA Support. Independent sessions ran in Chrome and Edge; no credentials were read or stored.
+- Verified owner session restoration, saved Viewer/Editor department grants, exact shared-source equality, an Editor save arriving in the owner's open editor without reload, source persistence after reload/reopen, preserved owner draft when a newer edit arrived, and explicit recovery to the latest shared source.
+- Switching the test member to QA Finance changed the open app to Viewer and disabled editing/sharing/deployment controls. Revocation removed the open app and shared listing without reload. Restored the Finance Viewer grant and the test member's Support Editor membership.
+- Verified owner reload and member sign-out/reload/sign-in, then reopened the same latest shared source. The authenticated Editor page measured390x844 with document/body width390; temporary viewport was reset. Evidence and screenshots are recorded in evals/2026-10-06-hosted-department-acceptance.md and runs.
+- Source import still awaits Chrome file-URL permission. A draft-download event timed out and bounded filesystem checks found no arrival; the browser tool rejected its internal downloads page. No download success is claimed. No user CRM source or unrelated access was modified.
