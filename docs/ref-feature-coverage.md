@@ -1,9 +1,9 @@
 # Architect 2.0 feature coverage
 
-> Current scope update (2026-10-05): the user deferred Google OAuth and explicitly chose real login ID/password accounts with shared department app data. This supersedes the older Google-blocked and owner-only statements below. The approved development schema/functions are deployed; all 15 live authentication and department API checks passed across independent accounts. Authenticated cross-browser UI acceptance and public release remain pending. See [department verification](../evals/2026-10-05-department-multiplayer.md) and [current backend setup](guide-backend-setup.md). Historical browser evidence below stays historical.
+> Current scope update (2026-10-06): the user deferred Google OAuth and chose real login ID/password accounts with shared department app data. The approved development backend passed 15/15 live API checks. The [public app and repository](../evals/2026-10-06-public-release.md) are published, and the recorded [hosted Chrome/Edge department matrix](../evals/2026-10-06-hosted-department-acceptance.md) passed sign-in/session, same-app editing, conflict recovery and reactive permission journeys. [Supplemental UI evidence](../evals/2026-10-06-supplemental-ui-verification.md) covers the mobile department dialog, design-reference simulation and Custom MCP simulation. Real source/ZIP file-picker acceptance remains permission-blocked. The older Google requirements and unverified checklist states below are historical, superseded by the password/department request and current [requirement audit](../evals/2026-10-05-requirement-audit.md).
 
 
-Scope baseline: 2026-10-05. This is an implementation and review checklist, not an approved blueprint or a claim that the features below already work. The user explicitly said **skip blueprint**. Their supplied assignment prioritizes a complete UI/UX journey for both technical and nontechnical users and permits dummy feature flows. Their separate request for Google OAuth and Convex remains a real integration target.
+Scope baseline: 2026-10-05. This is an implementation and review checklist, not an approved blueprint or a claim that the features below already work. The user explicitly said **skip blueprint**. Their supplied assignment prioritizes a complete UI/UX journey for both technical and nontechnical users and permits dummy feature flows. The original Google OAuth target was later deferred; real password authentication and shared department data on Convex supersede it. This inventory does not override that later decision.
 
 ## Evidence boundaries
 
@@ -16,11 +16,11 @@ Scope baseline: 2026-10-05. This is an implementation and review checklist, not 
 
 The current docs index mentions GitAgent beta, artifacts, environment variables and v2.2 GitHub import/test-agent features. Their detailed pages were unavailable through the web reader during this audit; only their index summaries are established. Do not invent detailed parity claims for those surfaces.
 
-The earlier `outputs/2026-10-05-architect-clone-preflight.md` required real model-backed generation. The later user-supplied assignment relaxes that requirement: a clearly labeled demonstration may cover generation, framework execution, GitHub and deployment. Do not relax the requested real Google/Convex work silently.
+The earlier `outputs/2026-10-05-architect-clone-preflight.md` required real model-backed generation. The later user-supplied assignment relaxes that requirement: a clearly labeled demonstration may cover generation, framework execution, GitHub and deployment. This earlier warning referred to the original Google/Convex target; the later explicit password/department scope is authoritative.
 
 ## Required journeys and review checkpoints
 
-Routes below name navigable destinations; an equivalent selected panel or modal is acceptable if it has a stable entry, a clear return path and preserved project context. All are initially **unverified in this implementation**.
+Routes below name navigable destinations; an equivalent selected panel or modal is acceptable if it has a stable entry, a clear return path and preserved project context. The rows preserve the initial, pre-implementation **unverified** inventory; they are not current verification statuses. Use the linked requirement audit and hosted evidence for current results.
 
 | Destination | Required experience | Significant acceptance check |
 |---|---|---|

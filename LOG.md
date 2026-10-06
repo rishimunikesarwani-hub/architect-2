@@ -98,3 +98,10 @@
 - Switching the test member to QA Finance changed the open app to Viewer and disabled editing/sharing/deployment controls. Revocation removed the open app and shared listing without reload. Restored the Finance Viewer grant and the test member's Support Editor membership.
 - Verified owner reload and member sign-out/reload/sign-in, then reopened the same latest shared source. The authenticated Editor page measured390x844 with document/body width390; temporary viewport was reset. Evidence and screenshots are recorded in evals/2026-10-06-hosted-department-acceptance.md and runs.
 - Source import still awaits Chrome file-URL permission. A draft-download event timed out and bounded filesystem checks found no arrival; the browser tool rejected its internal downloads page. No download success is claimed. No user CRM source or unrelated access was modified.
+
+### Supplemental parity and responsive verification
+
+- Rechecked the official feature index and added the documented per-agent usage breakdown. It uses configured agent names with explicitly illustrative totals; a stable project ID determines the sample, and each agent column sums to the app total. The view performs no model calls, billing or project writes.
+- Local browser checks verified keyboard expansion, switching between apps, navigation to the selected app, and the measured 391x844 mobile layout without horizontal overflow. Build/typecheck and focused auth/query review passed; hosted verification follows publication.
+- On the hosted synthetic QA app, verified the mobile department dialog and prefilled membership/access editors without saving permission changes. Verified sample design-reference review/apply/reload and Custom MCP HTTPS validation, scope review, simulated connection and disconnect. The actual CRM was untouched. See evals/2026-10-06-supplemental-ui-verification.md.
+- Real source/ZIP import still awaits the already-requested Chrome file-URL permission. The design-reference simulation does not replace that remaining check.
