@@ -1,6 +1,6 @@
 # Architect 2.0 release handoff
 
-The user approved public publication on 2026-10-06. The Architect prototype and repository are live. The recorded hosted Chrome/Edge department acceptance matrix passed; source/ZIP file-picker acceptance remains permission-blocked. Google OAuth is deferred in favor of real login ID/password accounts and shared department app data. Publishing and hiring-form submission are separate actions; no hiring submission is authorized or performed.
+The user approved public publication on 2026-10-06. The Architect prototype and repository are live. The recorded hosted Chrome/Edge department acceptance matrix passed, followed by the bounded hosted ZIP file-picker, preview, source-edit and reload journey. Google OAuth is deferred in favor of real login ID/password accounts and shared department app data. Publishing and hiring-form submission are separate actions; no hiring submission is authorized or performed.
 
 ## Initial published release
 
@@ -25,6 +25,6 @@ The [hosted department acceptance record](../evals/2026-10-06-hosted-department-
 
 Account creation was user-performed, not independently observed. Later file checks supersede the earlier inconclusive download watchers: the 5,415-byte JSON source export and 3,270-byte conflict-draft HTML file arrived and were verified by file hashes and content checks for the same synthetic QA app. Export source produces JSON; no ZIP export is claimed. The user's existing CRM project was preserved; the acceptance changes affected a separate synthetic QA app/workspace. [Supplemental verification](../evals/2026-10-06-supplemental-ui-verification.md).
 
-Complete the source/ZIP file-picker journey when Chrome's file-URL permission allows it. The safe `data/import-demo.zip` retry on local port 5180 was still permission-blocked. The user was asked to enable the permission; no successful import is recorded yet. Parser tests passed previously and do not prove the browser import flow.
+Earlier local retries were blocked by Chrome's file-URL permission. After the user enabled it, the hosted file chooser imported `data/import-demo.zip` into the new private Personal workspace app **QA imported operations - 2026-10-06**, with framework **Custom**. Both `index.html` and `README.md` matched the fixture. The preview button worked; changing the heading to **Imported operations workspace — saved edit**, saving, reloading and reopening retained the exact saved HTML and unchanged README, and the preview button still worked. Sampled error logs were empty. This verifies the two-file fixture journey, not arbitrary archives or framework execution. [Hosted import acceptance](../evals/2026-10-06-hosted-import-acceptance.md).
 
 Other unobserved download formats and UI branches retain the limits in the [requirement audit](../evals/2026-10-05-requirement-audit.md). Report the exact live/repository links and these limits; stop before the separate hiring submission form.
