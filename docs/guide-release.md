@@ -16,7 +16,7 @@ The complete hiring brief requests a live app URL, a GitHub repository, an archi
 
 Proposed new repository: `rishimunikesarwani-hub/architect-2`, public, containing the prototype source, tests, architecture drawings and explanation.
 
-Proposed new Vercel project: `architect-2`, deployed independently from the existing portfolio. Publish the reviewed prototype with the approved department backend connected after development acceptance passes. A disconnected demo remains an explicit fallback preview; it does not satisfy the user's real shared-data requirement. Do not modify another Vercel project, deploy a Convex production backend, or submit the hiring form.
+Proposed new Vercel project: `architect-2`, deployed independently from the existing portfolio. The development backend has passed all 15 live authentication/department API checks. After publication approval, publish the reviewed prototype connected to that backend, configure the canonical hosted origin, and complete authenticated browser acceptance there. Creating the user's personal account locally is not a prerequisite for preparing or requesting publication approval. A disconnected demo remains an explicit fallback preview; it does not satisfy the user's real shared-data requirement. Do not modify another Vercel project, deploy a Convex production backend, or submit the hiring form. Publication alone does not complete the goal while authenticated browser acceptance remains unverified.
 
 Verify both names are available before publishing; no remote repository or hosting project has yet been created by this handoff.
 
