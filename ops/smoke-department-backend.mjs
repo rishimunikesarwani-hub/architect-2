@@ -1,5 +1,6 @@
 /**
  * Explicitly authorized DEVELOPMENT smoke only: node ops/smoke-department-backend.mjs --run
+ * Fixed development backend with the canonical hosted frontend origin below.
  * Uses installed Better Auth's normal /sign-up/email, /sign-in/username,
  * /convex/token and /sign-out routes. The Convex plugin includes Bearer support.
  * Synthetic passwords/session tokens/JWTs remain in memory and are never logged.
@@ -11,7 +12,7 @@ import { api } from '../src/convex/_generated/api.js';
 
 const SITE = 'https://perceptive-ermine-27.convex.site';
 const CLOUD = 'https://perceptive-ermine-27.convex.cloud';
-const ORIGIN = 'http://localhost:5177';
+const ORIGIN = 'https://architect-2-weld.vercel.app';
 const timeoutFetch = (url, init = {}) => fetch(url, { ...init, redirect: 'error', signal: AbortSignal.timeout(20_000) });
 const client = () => new ConvexHttpClient(CLOUD, { logger: false, fetch: timeoutFetch });
 const check = (condition) => { if (!condition) throw new Error('Check failed'); };

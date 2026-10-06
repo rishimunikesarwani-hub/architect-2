@@ -2,7 +2,7 @@
 
 An assignment prototype for building agentic apps with a guided workspace and optional developer controls. User approved skipping blueprint on 2026-10-05.
 
-Open the local app at **http://localhost:5177**. Use `localhost`, as that is the configured authentication origin.
+Open the published app at **https://architect-2-weld.vercel.app**. The [public GitHub repository](https://github.com/rishimunikesarwani-hub/architect-2) includes the source and architecture artifacts. The hosted app is now the backend's canonical authentication origin; local development at `http://localhost:5177` is no longer the configured sign-in target.
 
 ## Run
 
@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-`npm run build` checks frontend types and produces `runs/dist`. `npm test` verifies password authentication, department permissions, revision conflicts, save queues, source-import limits and sample-preview interaction. `npm run backend` syncs source to the dedicated Convex development deployment. No production deployment has been performed.
+`npm run build` checks frontend types and produces `runs/dist`. `npm test` verifies password authentication, department permissions, revision conflicts, save queues, source-import limits and sample-preview interaction. `npm run backend` syncs source to the dedicated Convex development deployment. With user approval, the frontend was published on Vercel on 2026-10-06. It uses the existing development backend, not a Convex production deployment.
 
 ## What works
 
@@ -33,7 +33,9 @@ Historical prototype verification passed 19 tests and the production build. The 
 
 [Mobile panel verification](evals/2026-10-05-mobile-panels.md) now covers Design system, Build artifacts, GitAgent files, Custom tools and Studio handoff at **391 × 844**, with measured bounds inside the viewport and no horizontal overflow. Custom tools also retained a scrollable, labeled **Not sent** sample review. A 72-character knowledge title that previously overflowed now measures 207px content width / 207px scroll width after the wrapping fix; its draft was canceled without changing saved source. These are DOM geometry checks with no application errors, not screenshot proof—the screenshot service timed out. Other unreported mobile panels and authenticated department rendering remain unverified.
 
-The [live development smoke report](evals/2026-10-05-department-backend-smoke.json) records normal Better Auth signup/username sign-in for four synthetic accounts and independent Convex clients: same-app reads, editor-save propagation, viewer denial, outsider isolation, stale-revision rejection, revocation, wrong-password rejection, and logout invalidating the prior JWT. All 15 checks passed. Catalog backfill returned `done: true, migrated: 0`; readiness is `password: true, google: false`. DOM checks in the local browser at localhost:5177 confirmed password **Ready to sign in**, enabled forms and no sampled application errors. Screenshot-service attempts timed out; no screenshot proof is claimed. This does not yet prove authenticated browser sessions, cross-browser UI persistence or recovery. No public repository, frontend hosting, production deployment, or hiring submission has been completed.
+The [live development smoke report](evals/2026-10-05-department-backend-smoke.json) records normal Better Auth signup/username sign-in for four synthetic accounts and independent Convex clients: same-app reads, editor-save propagation, viewer denial, outsider isolation, stale-revision rejection, revocation, wrong-password rejection, and logout invalidating the prior JWT. All 15 checks passed. Catalog backfill returned `done: true, migrated: 0`; readiness is `password: true, google: false`. Historical local DOM checks confirmed password **Ready to sign in**, enabled forms and no sampled application errors; those screenshot-service attempts timed out.
+
+The [approved public release](evals/2026-10-06-public-release.md) first shipped from commit `4883145`; the release documentation and prototype drawing were then updated with the hosted status. Unauthenticated HTTP checks passed for the app, JavaScript/CSS and architecture downloads, with byte-identical artifact copies at the inspected release. The hosted homepage and sign-in/create-account forms rendered in the browser. The account form was handed to the user for password entry, so authenticated browser sessions, cross-browser persistence and recovery remain pending. A safe ZIP-import retry remained blocked by Chrome's file-URL permission. No hiring submission has been made.
 
 ## Setup and evidence
 
@@ -46,6 +48,7 @@ The [live development smoke report](evals/2026-10-05-department-backend-smoke.js
 - [Production engineering drawing](docs/arch-production-architecture.png) / [SVG](docs/arch-production-architecture.svg)
 - [Requirement-by-requirement audit](evals/2026-10-05-requirement-audit.md)
 - [Public release handoff](docs/guide-release.md)
+- [Published URLs and release verification](evals/2026-10-06-public-release.md)
 - [Browser verification and remaining checks](evals/2026-10-05-browser-verification.md)
 - [Extended feature and reload verification](evals/2026-10-05-parity-verification.md)
 - [Mobile panel geometry and knowledge-title overflow verification](evals/2026-10-05-mobile-panels.md)

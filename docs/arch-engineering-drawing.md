@@ -1,6 +1,6 @@
 # Architect 2.0 engineering drawing
 
-Snapshot: 2026-10-05. This records the prototype, its verified development backend and the previously discussed multiplayer direction. **The approved auth/department/catalog schema and functions were deployed to `dev:perceptive-ermine-27` on October 5 at 22:44 IST. All 15 live API smoke checks passed using normal Better Auth HTTP requests and independent Convex clients.** Authenticated cross-browser UI acceptance remains pending; Google setup is deferred. This is not a new blueprint or a production-readiness claim; the assignment permits simulated feature flows.
+Snapshot: 2026-10-06. The approved prototype is published at the canonical origin [architect-2-weld.vercel.app](https://architect-2-weld.vercel.app), with its [public source repository](https://github.com/rishimunikesarwani-hub/architect-2). The hosted frontend uses the same development backend. **The approved auth/department/catalog schema and functions were deployed to `dev:perceptive-ermine-27` on October 5 at 22:44 IST. All 15 live API smoke checks passed using normal Better Auth HTTP requests and independent Convex clients.** Authenticated cross-browser UI acceptance remains pending; Google setup is deferred. This drawing records that published prototype and the previously discussed multiplayer direction, not a production-readiness claim; the assignment permits simulated feature flows.
 
 ![Architect 2.0 engineering map](arch-engineering-drawing.svg)
 
@@ -10,12 +10,12 @@ Snapshot: 2026-10-05. This records the prototype, its verified development backe
 
 | Status | Meaning |
 |---|---|
-| Source and development evidence | Frontend/source implementation exists; the approved development backend is deployed and has 15 passing live API checks. This does not establish authenticated cross-browser UI acceptance or production readiness. |
+| Hosted prototype and development evidence | The Vercel frontend and source repository are public; the approved development backend has 15 passing live API checks. This does not establish authenticated cross-browser UI acceptance or production readiness. |
 | Deferred Google | Optional provider wiring remains; credentials and a Google round trip are not part of the completed verification. |
 | Simulated | A UI demonstration updates prototype state. No live model, GitHub write, external tool, email invitation or app deployment runs. |
 | Proposed | Agent registry, runtime invocation grants, protected execution, comments and simultaneous co-editing remain future work. |
 
-The new development deployment replaces the earlier owner-only snapshot. `catalog.backfillLegacy` returned `done: true, migrated: 0`; readiness returned password true and Google false. The frontend at `http://localhost:5177` displayed the ready state, but its authenticated cross-browser journey has not yet been accepted. [Live backend smoke report](../evals/2026-10-05-department-backend-smoke.json).
+The development deployment replaces the earlier owner-only snapshot. `catalog.backfillLegacy` returned `done: true, migrated: 0`; readiness returned password true and Google false. The earlier localhost frontend displayed the ready state; the current canonical frontend is [the hosted prototype](https://architect-2-weld.vercel.app). Its authenticated cross-browser journey has not yet been accepted. [Live backend smoke report](../evals/2026-10-05-department-backend-smoke.json).
 
 ## Current application architecture
 
@@ -26,7 +26,7 @@ flowchart LR
   classDef simulated fill:#f1edfb,stroke:#8a73b4,color:#493466
   classDef future fill:#f3f5f6,stroke:#879399,stroke-dasharray:6 4,color:#35434b
 
-  subgraph Browser["Browser - local frontend source"]
+  subgraph Browser["Browser - hosted Vercel prototype"]
     UI["Guided / Developer workspace<br/>login ID form + department controls"]:::local
     State["ProjectSaveQueue + draft state<br/>per-project writes, expected revision<br/>dirty / blocked / hold / explicit recovery"]:::local
     Local[("Guest demo localStorage")]:::local

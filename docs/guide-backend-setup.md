@@ -8,9 +8,9 @@ The user deferred Google OAuth and explicitly chose real login ID/password accou
 - [Development dashboard](https://dashboard.convex.dev/t/rishi-muni-kesarwani/architect-2/perceptive-ermine-27).
 - API: https://perceptive-ermine-27.convex.cloud
 - Authentication: https://perceptive-ermine-27.convex.site
-- Trusted local app origin: http://localhost:5177 (use localhost, not 127.0.0.1).
+- Trusted app origin: https://architect-2-weld.vercel.app (configured with publication approval on 2026-10-06).
 
-The existing BETTER_AUTH_SECRET and SITE_URL remain on this dedicated deployment. No additional Google credentials, Google project or payment setup is required for password sign-in. Never place a secret in VITE_* variables, source, chat, project files or Git.
+The existing BETTER_AUTH_SECRET remains on this dedicated deployment. SITE_URL now points at the canonical hosted app; the current single-origin configuration no longer trusts localhost or other Vercel preview aliases. Hosted sessions start with a fresh sign-in. No additional Google credentials, Google project or payment setup is required for password sign-in. Never place a secret in VITE_* variables, source, chat, project files or Git.
 
 ## Development update applied
 
@@ -26,11 +26,11 @@ npm run build
 npx tsc --project src/convex/tsconfig.json --noEmit
 ```
 
-Only the dedicated development target was updated. No `convex deploy`, production deployment, public frontend hosting, repository publication or hiring submission was performed. Preserve the named deployment selector and keep configuration secrets out of verification output.
+Only the dedicated development backend target was updated; no `convex deploy` was run. On 2026-10-06, public frontend/repository publication completed with the user's approval while retaining this development backend. See [public release evidence](../evals/2026-10-06-public-release.md). Hiring submission remains unperformed. Preserve the named deployment selector and keep configuration secrets out of verification output.
 
 ## Account and department flow
 
-1. Open Sign in > Create account. Each person chooses their own login ID and password, display name and email. Login IDs are 3-40 letters, numbers, dots or underscores, normalized to lowercase; passwords are 12-128 characters. Existing Google accounts are not silently linked to password accounts.
+1. Open https://architect-2-weld.vercel.app > Sign in > Create account. Each person chooses their own login ID and password, display name and email. Login IDs are 3-40 letters, numbers, dots or underscores, normalized to lowercase; passwords are 12-128 characters. Existing Google accounts are not silently linked to password accounts.
 2. The owner opens Settings > Manage departments, creates a workspace, then departments such as Support and Finance.
 3. Teammates create their own accounts. The owner assigns each exact existing login ID to one department in that workspace. There is no invitation email and users cannot choose their own privileged department.
 4. The owner opens an owned app > Manage access, attaches it to the workspace, and grants Viewer or Editor access to each department.
