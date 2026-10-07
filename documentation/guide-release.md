@@ -19,6 +19,8 @@ The initial release used commit `4883145cd6dd2841c69940e7dfe022bf90693fd7` and V
 
 The [public release record](../verification-records/2026-10-06-public-release.md) contains the initial HTTP/assets, artifact-hash, repository and hosted-form checks. The [earlier preflight](../verification-records/2026-10-05-release-preflight.md) describes the state before publication approval. Its uncreated-resource statements are historical.
 
+The [7 October readiness record](../verification-records/2026-10-07-submission-readiness.md) records the published folder refactor and import/save fixes: source commit `9b95366`, Ready deployment `dpl_2Do9RGbq8QrvLDXrWqKuzWm2ExGB`, passing local/hosted checks and the remaining prototype boundaries. Later evidence-only commits do not change that deployed application code.
+
 ## What the release contains
 
 The repository includes application source, both engineering drawings and their Markdown explanations. The current prototype drawing describes implemented behavior. The production drawing proposes execution services and scaling; publishing the drawing does not deploy those services.

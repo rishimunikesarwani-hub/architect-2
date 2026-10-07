@@ -1,6 +1,6 @@
 # Submission-readiness review — 7 October 2026
 
-The candidate contains the descriptive folder refactor, working reviewer instructions, current/proposed architecture documents, and import/save fixes found during review. Automated and clean-source checks passed, and the changed local browser journeys below are now verified against code commit `628afb1e5191b547bac62cbd214116416e23304d`. Public release alignment remains pending. This is an assignment prototype, not a deployed production agent runtime.
+The reviewed release contains the descriptive folder refactor, reviewer instructions, current/proposed architecture documents, and import/save fixes found during review. Automated and clean-source checks passed, and the changed local browser journeys below were verified against code commit `628afb1e5191b547bac62cbd214116416e23304d`. The same application code is now published with browser-acceptance documentation at commit `9b9536645a540a14fc374b6f9141c7e0b2373935`. The live app, public repository and architecture attachments are ready for assignment review. This is an assignment prototype, not a deployed production agent runtime.
 
 ## Candidate changes
 
@@ -53,11 +53,21 @@ Local proof screenshots are `large-import-desktop.jpg` and `large-import-phone-p
 
 The optional quote-heavy **editor** rejection follow-up remains unverified in the browser: automation lost its connection while filling the draft. Existing state was preserved, and the automated rejection checks passed. This does not negate the completed escape-heavy **import** rejection or normal large-source edit/save/reload checks. Earlier browser connection failures remain historical attempts, not application failures.
 
-## Public release alignment still pending
+## Published release and hosted verification
 
-The remote main branch was last checked at `78e1cd78e483de7e214bbef94392eedad2871d8b`; the local code candidate is `628afb1e5191b547bac62cbd214116416e23304d`. The candidate changes have not yet been published. Documentation commit, push/deployment and post-release verification remain separate steps; this record does not claim they have occurred.
+The reviewed source and browser-acceptance record were pushed to public GitHub main at `9b9536645a540a14fc374b6f9141c7e0b2373935`. Vercel built that clean checkout with `npm ci` and `npm run build`, then marked deployment `dpl_2Do9RGbq8QrvLDXrWqKuzWm2ExGB` Ready and aliased it to the canonical app. This final evidence update changes documentation only; the deployed application code remains the evaluated candidate.
 
-The hosted app was inspected earlier in this review with the existing owner session. The synthetic imported QA app loaded its saved heading and two-file project. The owner's CRM was left untouched. Earlier two-browser permission evidence remains in the [hosted department record](2026-10-06-hosted-department-acceptance.md), with its original date and scope.
+| Target or check | Observed result |
+|---|---|
+| Canonical app | [architect-2-weld.vercel.app](https://architect-2-weld.vercel.app) returned HTTP 200. |
+| Deployment | [Reviewed Vercel deployment](https://architect-2-4g84qrh1i-rishi-personal.vercel.app) reached Ready; canonical alias was confirmed by Vercel inspection. |
+| Repository | [Public GitHub source](https://github.com/rishimunikesarwani-hub/architect-2) was confirmed public through an unauthenticated request; main matched the published commit before this documentation-only update. |
+| Referenced assets | All three JS/CSS files referenced directly by the hosted index returned HTTP 200. No claim of byte-identical guest and connected JS builds is made. |
+| Served attachments | All six files emitted by the asset-sync script, including production Markdown, PNG and both SVG routes, matched local served copies byte for byte. |
+| Hosted session and saved app | The existing owner session loaded the synthetic imported QA project and its two source files. Preview showed `Imported operations workspace — saved edit`; its button returned `Local interaction works.` |
+| Captured browser messages | Only an extension warning was captured, with no captured application warnings/errors. The hosted app was left open. |
+
+HTTP verification ran at 12:21 UTC on 7 October 2026. Its local evidence is `generated-output/submission-readiness/hosted-http-verification.json`; the visible hosted proof is `hosted-release-viewport.jpg` in the same local folder. Post-release browser checks were read-only for saved backend data. The owner's CRM was untouched. Earlier two-browser permission evidence remains in the [hosted department record](2026-10-06-hosted-department-acceptance.md), with its original date and scope; it was not rerun as part of this frontend release.
 
 Both architecture PNGs were visually inspected. Their SVG/PNG source and served-copy consistency was checked. The supplied payment-status brief and immutable pre-refactor backup remain unchanged. A bounded credential-pattern scan of 105 authored/config files found no matches or unexpected environment files; it is not a guarantee against every possible secret.
 
@@ -65,4 +75,4 @@ Both architecture PNGs were visually inspected. Their SVG/PNG source and served-
 
 Use the [reviewer guide](../documentation/guide-submission.md) for the live/source links, architecture attachments and demo route. The working prototype includes real login IDs, shared saved projects, department access and revision checks on the dedicated development backend. Generation, model/framework execution, external tools, GitHub operations and generated-app deployment remain simulations. Google is deferred. Production scale figures are design assumptions.
 
-No schema/backend deployment, permission change, personal-data upload or hiring-form submission was performed by this review.
+The frontend publication was authorized for the existing GitHub/Vercel target. No schema/backend deployment, permission change, personal-data upload or hiring-form submission was performed by this review. The source package excludes local credentials, private browser data, dependencies and generated evidence; its manifest records every included file and verifies the ZIP round trip.
