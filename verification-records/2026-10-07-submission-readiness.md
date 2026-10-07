@@ -1,6 +1,6 @@
 # Submission-readiness review — 7 October 2026
 
-The candidate contains the descriptive folder refactor, working reviewer instructions, current/proposed architecture documents, and import/save fixes found during review. It is being checked as a sendable assignment prototype. It does not claim a deployed production agent runtime.
+The candidate contains the descriptive folder refactor, working reviewer instructions, current/proposed architecture documents, and import/save fixes found during review. Automated and clean-source checks passed, and the changed local browser journeys below are now verified against code commit `628afb1e5191b547bac62cbd214116416e23304d`. Public release alignment remains pending. This is an assignment prototype, not a deployed production agent runtime.
 
 ## Candidate changes
 
@@ -35,10 +35,27 @@ A duplicate root evaluation was interrupted when the delegated run was discovere
 
 The 108-file sanitized candidate at `generated-output/release-audit/2026-10-07T09-59-14-228Z/` passed a fresh `npm ci` using its own dependencies and cache, followed by `npm run check`: 97/97 tests in nine files, both typechecks, hygiene and the website build. It has no `.git` or local environment values. The lockfile stayed unchanged. The first install attempt failed because the verification wrapper supplied one file for two npm configuration roles; using two distinct empty config files fixed that harness error. It was not an application failure.
 
-## Readiness gates still in progress
+## Changed local browser journeys
 
-- Changed browser journeys: large-source import/edit/reload, duplicate-ZIP error and oversized-import inline recovery await browser verification. The browser control connection failed before opening a page; no pass is inferred.
-- Public release alignment: the remote main branch was checked at `78e1cd78e483de7e214bbef94392eedad2871d8b`; these candidate changes are not yet published.
+Browser control recovered after the earlier connection failures. These checks used disconnected local QA projects, with code unchanged at `628afb1e5191b547bac62cbd214116416e23304d`; no live database writes were made.
+
+| Check | Observed result |
+|---|---|
+| Escape-heavy 300,000-byte import | The inline serialized-budget alert appeared while the project name, framework and selected file remained available for recovery. |
+| Duplicate ZIP and recovery | The duplicate-entry alert cleared the invalid file selection and disabled Import. Selecting valid source again recovered the flow. |
+| Normal large-source import | A fresh QA project imported `fixtures/large/index.html`, exactly 300,000 characters/bytes. The complete editor value matched the fixture. |
+| Edit, save and reopen | Changed the heading from ready to saved without changing the 300,000-byte length. Save succeeded; reload/reopen returned the exact expected full source, and the iframe displayed `Large import saved`. |
+| History limit explained | Version history showed the correct empty-checkpoint explanation for the large source. Escape closed the dialog, including in the phone check. |
+| Phone readability | At a measured 391 × 844 viewport, document/body widths were 391 with no horizontal overflow. After hiding the conversation, the history-budget notice and Export source control were readable. The viewport was restored to 1576 × 887. |
+| Captured console messages | Only a browser-extension warning was captured; no application warnings or errors were captured. This is bounded observation, not an exhaustive logging claim. |
+
+Local proof screenshots are `large-import-desktop.jpg` and `large-import-phone-preview.jpg`; they remain local artifacts rather than links to ignored files in this report.
+
+The optional quote-heavy **editor** rejection follow-up remains unverified in the browser: automation lost its connection while filling the draft. Existing state was preserved, and the automated rejection checks passed. This does not negate the completed escape-heavy **import** rejection or normal large-source edit/save/reload checks. Earlier browser connection failures remain historical attempts, not application failures.
+
+## Public release alignment still pending
+
+The remote main branch was last checked at `78e1cd78e483de7e214bbef94392eedad2871d8b`; the local code candidate is `628afb1e5191b547bac62cbd214116416e23304d`. The candidate changes have not yet been published. Documentation commit, push/deployment and post-release verification remain separate steps; this record does not claim they have occurred.
 
 The hosted app was inspected earlier in this review with the existing owner session. The synthetic imported QA app loaded its saved heading and two-file project. The owner's CRM was left untouched. Earlier two-browser permission evidence remains in the [hosted department record](2026-10-06-hosted-department-acceptance.md), with its original date and scope.
 
