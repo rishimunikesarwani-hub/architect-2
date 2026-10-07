@@ -2,7 +2,7 @@
 .env*
 .convex
 node_modules
-runs
-tests
-evals
-data
+generated-output
+automated-tests
+verification-records
+sample-projects

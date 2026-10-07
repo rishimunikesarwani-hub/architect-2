@@ -4,11 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node ops/sync-diagram.mjs && vite --config ops/vite.config.ts --host 127.0.0.1",
-    "build": "tsc --project ops/tsconfig.json --noEmit && node ops/sync-diagram.mjs && vite build --config ops/vite.config.ts",
-    "preview": "vite preview --config ops/vite.config.ts --host 127.0.0.1",
+    "dev": "node development-tools/sync-diagram.mjs && vite --config development-tools/vite.config.ts --host 127.0.0.1",
+    "build": "tsc --project development-tools/tsconfig.json --noEmit && node development-tools/sync-diagram.mjs && vite build --config development-tools/vite.config.ts",
+    "preview": "vite preview --config development-tools/vite.config.ts --host 127.0.0.1",
     "backend": "convex dev",
-    "test": "vitest run --config ops/vitest.config.ts"
+    "test": "vitest run --config development-tools/vitest.config.ts",
+    "typecheck:frontend": "tsc --project development-tools/tsconfig.json --noEmit",
+    "typecheck:backend": "tsc --project application/backend/tsconfig.json --noEmit",
+    "hygiene": "node development-tools/check-hygiene.mjs",
+    "check": "npm run hygiene && npm run typecheck:frontend && npm run typecheck:backend && npm test && npm run build",
+    "diagrams": "node development-tools/render-production-diagram.mjs && node development-tools/render-diagram.mjs && node development-tools/sync-diagram.mjs",
+    "eval": "node development-tools/run-evaluation.mjs"
   },
   "dependencies": {
     "@convex-dev/better-auth": "0.12.5",

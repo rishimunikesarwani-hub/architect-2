@@ -3,7 +3,7 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "installCommand": "npm ci",
-  "outputDirectory": "runs/dist",
+  "outputDirectory": "generated-output/website",
   "rewrites": [{ "source": "/((?!.*\\.).*)", "destination": "/index.html" }],
   "headers": [{
     "source": "/(.*)",
